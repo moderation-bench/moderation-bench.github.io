@@ -270,7 +270,7 @@
   }
   .finding-card {
     background: white; border: 1px solid var(--slate-mid);
-    border-radius: var(--radius); padding: 1.6rem;
+    border-radius: var(--radius); padding: 1.2rem 1.4rem;
     box-shadow: var(--shadow);
     transition: transform 0.2s, box-shadow 0.2s;
     position: relative; overflow: hidden;
@@ -283,13 +283,13 @@
   .finding-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
   .finding-num {
     font-family: var(--mono); font-size: 0.7rem; color: var(--teal);
-    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem;
   }
   .finding-card h3 {
-    font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
-    margin-bottom: 0.6rem; line-height: 1.25;
+    font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
+    margin-bottom: 0.4rem; line-height: 1.25;
   }
-  .finding-card p { color: var(--text-light); font-size: 0.88rem; line-height: 1.6; }
+  .finding-card p { color: var(--text-light); font-size: 0.88rem; line-height: 1.5; }
   .finding-highlight { color: var(--teal); font-weight: 600; }
 
   /* === DATASET === */
@@ -878,23 +878,23 @@
       <a href="#" class="btn btn-primary">&#128196; Read Paper</a>
       <a href="https://huggingface.co/datasets/modprompts/ModerationPrompts" target="_blank" class="btn btn-outline"><img src="icons/huggingface-color.svg" class="model-icon" alt="" style="width:1.1em;height:1.1em;vertical-align:-0.15em;margin-right:0.35em;"> View Dataset</a>
     </div>
-    <div class="content-warning">⚠ Content Warning: This paper contains examples of potentially harmful or offensive content.</div>
+    <div class="content-warning"><i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24;"></i> Content Warning: This paper contains examples of potentially harmful or offensive content.</div>
     <div class="hero-stats">
       <div class="stat">
         <span class="stat-num"><em>4,000</em></span>
         <span class="stat-label">Annotated Posts</span>
       </div>
       <div class="stat">
-        <span class="stat-num"><em>12</em></span>
+        <span class="stat-num"><em>14</em></span>
         <span class="stat-label">VLMs Benchmarked</span>
       </div>
       <div class="stat">
         <span class="stat-num"><em>2</em></span>
-        <span class="stat-label">Paradigms Evaluated</span>
+        <span class="stat-label">Policy Guidance Paradigms</span>
       </div>
       <div class="stat">
         <span class="stat-num"><em>3×</em></span>
-        <span class="stat-label">Better F₁ than BMS</span>
+        <span class="stat-label">VLM F₁ vs. deployment</span>
       </div>
     </div>
   </div>
@@ -905,34 +905,40 @@
   <div class="container">
     <div class="section-label">Overview</div>
 
+    <!-- <div class="overview-lead reveal">
+      <p>ModerationBench is the <strong>first benchmark</strong> to include-world platform moderation decisions. Extensive analysis reveals that VLMs can <strong>nearly triple</strong> Bluesky's deployed moderation performance, while instruction-driven policy guidance achieves comparable or better results at <strong>64× lower inference cost</strong>.</p>
+    </div> -->
     <div class="overview-lead reveal">
-      <p>Foundation models can <strong>nearly triple</strong> the F₁ of a deployed moderation system — and structured policy reasoning matches precedent-based guidance at <strong>64× lower inference cost</strong>.</p>
+    <p><strong>ModerationBench</strong> is the <strong>first benchmark</strong> to include real-world platform moderation decisions. Evaluations show VLMs can <strong>nearly triple</strong> Bluesky's deployed moderation performance, while instruction-driven policy guidance matches or exceeds precedent-based prompting at <strong>64× lower inference cost</strong>.</p>
     </div>
 
     <p class="overview-intro reveal">
-      We systematically compare two paradigms for guiding Vision-Language Models through Bluesky's real-world content policy on <strong>ModerationBench</strong> — 4,000 manually annotated multimodal posts across four complementary evaluation subsets. All models are benchmarked against <strong><a href="https://bsky.app/profile/did:plc:ar7c4by46qjdydhdevvrndac" target="_blank" rel="noopener">BMS</a></strong> (Bluesky Moderation Service), the platform's deployed automated moderation system.
+      We introduce <strong>ModerationBench</strong>, a benchmark of 4,000 multimodal posts collected from the Bluesky social media platform across four complementary evaluation subsets. With the inclusion of real-world platform moderation labels assigned by <strong><a href="https://bsky.app/profile/did:plc:ar7c4by46qjdydhdevvrndac" target="_blank" rel="noopener">BMS (Bluesky Moderation Service)</a></strong>, we provide <strong>the first benchmark</strong> to pair production moderation decisions with independent human annotations grounded in the platform's policy. We evaluate 14 Vision-Language Models spanning open-weight, frontier (API-based), and specialized safety-tuned models under two prompting paradigms of policy guidance.
     </p>
+    <!-- <p class="overview-intro reveal">
+      We systematically compare two paradigms for guiding Vision-Language Models through Bluesky's real-world content policy on <strong>ModerationBench</strong> — 4,000 manually annotated multimodal posts across four complementary evaluation subsets. All models are benchmarked against <strong><a href="https://bsky.app/profile/did:plc:ar7c4by46qjdydhdevvrndac" target="_blank" rel="noopener">BMS</a></strong> (Bluesky Moderation Service), the platform's deployed automated moderation system.
+    </p> -->
 
     <div class="overview-paradigms reveal">
       <div class="paradigm-card instruction">
         <div class="paradigm-label">Paradigm 01 &mdash; Instruction-Driven</div>
-        <div class="paradigm-headline">Reason from<br>policy text</div>
+        <div class="paradigm-headline">Reason from platform policy text</div>
         <div class="paradigm-stats">
           <div class="paradigm-stat">
             <span>Policy granularity</span>
-            <span class="paradigm-stat-val">Labels → +Rationale → +Details</span>
+            <span class="paradigm-stat-val">Labels · Rationale · Details</span>
           </div>
           <div class="paradigm-stat">
             <span>Policy scale</span>
-            <span class="paradigm-stat-val">177 rules &middot; 3,014 words</span>
+            <span class="paradigm-stat-val">177 rules &middot; 3,000+ words</span>
           </div>
           <div class="paradigm-stat">
-            <span>Best F₁ on random posts</span>
+            <span>Best F₁ on random platform content</span>
             <span class="paradigm-stat-val">0.60</span>
           </div>
           <div class="paradigm-stat">
-            <span>Open-weight latency</span>
-            <span class="paradigm-stat-val">~1 s / post</span>
+            <span>Open-weight throughput</span>
+            <span class="paradigm-stat-val">~50 posts / min</span>
           </div>
           <div class="paradigm-stat">
             <span>Frontier API cost</span>
@@ -941,11 +947,11 @@
         </div>
       </div>
 
-      <div class="paradigm-vs">VS</div>
+      <div class="paradigm-vs">VS.</div>
 
       <div class="paradigm-card example">
         <div class="paradigm-label">Paradigm 02 &mdash; Example-Driven</div>
-        <div class="paradigm-headline">Generalize from<br>precedents</div>
+        <div class="paradigm-headline">Generalize from platform precedents</div>
         <div class="paradigm-stats">
           <div class="paradigm-stat">
             <span>Example strategy</span>
@@ -956,12 +962,12 @@
             <span class="paradigm-stat-val">Prior BMS moderation decisions</span>
           </div>
           <div class="paradigm-stat">
-            <span>Best F₁ on random posts</span>
+            <span>Best F₁ on random platform content</span>
             <span class="paradigm-stat-val">0.59</span>
           </div>
           <div class="paradigm-stat">
-            <span>Open-weight latency</span>
-            <span class="paradigm-stat-val">~60 s / post (64× slower)</span>
+            <span>Open-weight throughput</span>
+            <span class="paradigm-stat-val">~1 post / min (50× slower)</span>
           </div>
           <div class="paradigm-stat">
             <span>Frontier API cost</span>
@@ -978,39 +984,41 @@
 <section class="section section-dark" id="findings">
   <div class="container">
     <div class="section-label">Key Findings</div>
-    <h2>Six Key Takeaways</h2>
-    <p class="section-intro">Across all four ModerationBench subsets, experiments with both paradigms surface six consistent takeaways.</p>
+    <!-- <h2>Six Key Takeaways</h2> -->
+    <h2>What ModerationBench Reveals</h2>
+    <p class="section-intro">ModerationBench curation and VLM evaluations surface six consistent takeaways.</p>
     <div class="findings-grid">
       <div class="finding-card reveal">
         <div class="finding-num">Finding 01</div>
-        <h3>3× Better Than<br>Deployed System</h3>
-        <p>VLMs close BMS's stark recall gap — the deployed system misses the vast majority of harmful posts in random in-the-wild traffic, while the best VLMs achieve dramatically higher coverage at modest false-positive risk.</p>
+        <h3>VLMs Perform 3× Better Than Deployed System</h3>
+        <p>VLMs nearly triple the performance of Bluesky's deployed moderation system on random in-the-wild traffic by substantially improving harmful content detection while maintaining modest false-positive rates.</p>
       </div>
       <div class="finding-card reveal">
         <div class="finding-num">Finding 02</div>
-        <h3>Granular Policy<br>Details Matter</h3>
-        <p>Providing complete policy details (What, Why &amp; How) substantially improves F₁ and reduces over-flagging, bringing model behavior closer to human annotator judgment.</p>
+        <h3>Open-Weight Models Compete With Frontier Ones</h3>
+        <p>Open-weight VLMs such as gemma4 and qwen3.5 match Gemini 3.5's performance and even outperform GPT-5.6, while avoiding substantial API costs, making them a practical choice for scalable deployment.</p>
       </div>
       <div class="finding-card reveal">
         <div class="finding-num">Finding 03</div>
-        <h3>Open-Weight Matches<br>Frontier</h3>
-        <p><span class="finding-highlight">gemma4 (31B)</span> matches gemini3.5 performance while avoiding substantial API costs, making open-weight VLMs viable for scalable deployment.</p>
+        <h3>AI Safety Models Struggle in Real-World Moderation</h3>
+        <p>Specialized safety models fail to adapt to platform policies; Llama-Guard performs worse than BMS & Shieldstral achieves strong recall on platform-moderated posts, but over-flags on random traffic.</p>
       </div>
       <div class="finding-card reveal">
         <div class="finding-num">Finding 04</div>
-        <h3>Example-Driven:<br>Same F₁, 64× Cost</h3>
-        <p>Example-driven's overhead limits practical coverage: only two models ran the full evaluation vs. twelve under instruction-driven — and even then, peak F₁ falls just short, with substantially higher API cost for frontier models.</p>
+        <h3>Deployed Moderation System Has Large Recall Issue</h3>
+        <p>Human annotations reveal 4.5x more harmful content than what BMS flags; 35% of posts semantically similar to past moderations were judged unsafe by humans yet completely missed by BMS.</p>
       </div>
       <div class="finding-card reveal">
         <div class="finding-num">Finding 05</div>
-        <h3>35% Missed<br>Harmful Content</h3>
-        <p>ModerationBench reveals a critical coverage gap: over a third of posts semantically similar to known violations (near-moderated — never flagged by BMS) were judged unsafe by humans yet completely missed by the deployed system.</p>
+        <h3>Granular Policy Details Ground VLMs in Platform Rules</h3>
+        <p>Providing detailed rulesets of moderation scope and platform's rationale of why moderation is needed substantially improves F₁ and reduces over-flagging, bringing VLMs closer to annotator judgments.</p>
       </div>
       <div class="finding-card reveal">
         <div class="finding-num">Finding 06</div>
-        <h3>Safety Models Fail<br>In the Wild</h3>
-        <p>llama-guard fails to adapt to Bluesky's policy, achieving F₁ no better than BMS even when given it. shieldstral achieves strong recall on curated harmful posts under Bluesky's policy, but over-flags substantially on random in-the-wild traffic.</p>
+        <h3>Example-Driven Prompting Trades Efficiency for Little Gain</h3>
+        <p>Open-weight models struggle to analyze in-context multimodal examples, while frontier models remain effective; inference time for all models and API costs for frontier models substantially increase.</p>
       </div>
+      
     </div>
   </div>
 </section>
@@ -1371,7 +1379,7 @@
         Representative cases where gemma4 and qwen3.5 reach different moderation decisions on the same post, citing different policy rules to justify their reasoning.
       </p>
       <p style="font-weight:700; color:#dc2626; font-size:0.88rem; margin:0 0 1.2rem; line-height:1.5;">
-        ⚠ Content Warning: The following examples contain real social media posts with offensive language, slurs, threats, and hateful content.
+        <i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24; margin-right:0.3em;"></i>Content Warning: The following examples contain real social media posts with offensive language, slurs, threats, and hateful content.
       </p>
 
       <div class="disex-carousel reveal">
