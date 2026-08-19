@@ -56,6 +56,40 @@
   }
   .nav-links a:hover { color: var(--teal); }
 
+  /* === NAV DROPDOWN === */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a::after { content: none; }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%);
+    padding-top: 10px; /* bridge hover gap without visual space */
+    z-index: 200;
+    min-width: 200px;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(8,14,31,0.97);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(14,165,201,0.2);
+    border-radius: 8px;
+    padding: 0.4rem 0;
+    white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .nav-dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-dropdown-menu a:hover { color: var(--teal); background: rgba(14,165,201,0.07); }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+
   /* === HERO === */
   .hero {
     background: var(--navy);
@@ -375,7 +409,7 @@
     transition: all 0.15s; font-family: var(--sans);
   }
   .tab-btn:last-child { border-right: none; }
-  .tab-btn.active { background: var(--teal); color: white; border-color: var(--teal); }
+  .tab-btn.active { background: rgba(14,165,201,0.10); color: var(--teal); border-color: var(--teal); font-weight: 600; }
   .tab-btn:hover:not(.active) { background: var(--slate); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
@@ -429,7 +463,7 @@
     font-size: 0.7rem; font-weight: 500; font-family: var(--mono);
   }
   .badge-frontier { background: #fef3c7; color: #92400e; }
-  .badge-open { background: #d1fae5; color: #065f46; }
+  .badge-open { background: #dbeafe; color: #1e40af; }
   .badge-deployed { background: #f1f5f9; color: #64748b; }
   .badge-random { background: #e0f2fe; color: #075985; }
   .badge-proto { background: #ede9fe; color: #4c1d95; }
@@ -468,6 +502,7 @@
   .ex-safe-note { color:rgba(255,255,255,0.35); font-size:0.82rem; margin-top:1.5rem; border-left:3px solid rgba(14,165,201,0.4); padding-left:0.85rem; line-height:1.6; }
   .paradigm-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:3.5rem 0 2.5rem; }
   .subsec-divider { border:none; border-top:1px solid var(--slate-mid); margin:3rem 0 2rem; }
+  .section-sep { border-top: 2px solid #e2e8f0; }
   .subsec-h3 { font-family:var(--serif); font-size:1.5rem; font-weight:400; color:var(--text); margin-bottom:0.5rem; margin-top:0.2rem; }
   .paradigm-subhead { margin-bottom:1rem; }
   .paradigm-subhead h3 { font-family:var(--serif); font-size:1.6rem; font-weight:400; color:white; margin-top:0.2rem; }
@@ -607,7 +642,7 @@
   .guard-tab-group { display:flex; border:1px solid var(--slate-mid); border-radius:6px; overflow:hidden; margin-bottom:1.2rem; width:fit-content; }
   .guard-tab-btn { padding:0.45rem 1.1rem; font-size:0.8rem; font-family:var(--mono); font-weight:600; background:white; color:var(--muted); border:none; cursor:pointer; transition:all 0.15s; border-right:1px solid var(--slate-mid); }
   .guard-tab-btn:last-child { border-right:none; }
-  .guard-tab-btn.active { background:var(--teal); color:white; border-color:var(--teal); }
+  .guard-tab-btn.active { background:rgba(14,165,201,0.10); color:var(--teal); border-color:var(--teal); font-weight:600; }
   .guard-tab-btn:hover:not(.active) { background:var(--slate); }
   .guard-tab-panel { display:none; }
   .guard-tab-panel.active { display:block; }
@@ -725,15 +760,15 @@
   /* Sankey diagram */
   .sankey-pair-tabs { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.6rem; }
   .sankey-tab { padding:0.32rem 0.85rem; font-family:var(--mono); font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--slate-mid); border-radius:4px; cursor:pointer; background:white; color:var(--muted); transition:all 0.15s; }
-  .sankey-tab.active { background:var(--teal); color:white; border-color:var(--teal); }
+  .sankey-tab.active { background:rgba(14,165,201,0.10); color:var(--teal); border-color:var(--teal); font-weight:600; }
   .sankey-tab:hover:not(.active) { background:var(--slate); }
 
   /* === LEADERBOARD === */
   .lb-subset-tabs { display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem; }
   .lb-stab { display:flex; align-items:center; gap:0.5rem; padding:0.5rem 1rem; border:1px solid var(--slate-mid); border-radius:8px; background:white; cursor:pointer; font-size:0.82rem; font-family:var(--mono); font-weight:600; color:var(--text-light); transition:all 0.15s; }
   .lb-stab:hover:not(.active) { background:var(--slate); color:var(--text); }
-  .lb-stab.active { background:var(--teal); color:white; border-color:var(--teal); }
-  .lb-stab.active i { filter:brightness(2); }
+  .lb-stab.active { background:rgba(14,165,201,0.10); color:var(--teal); border-color:var(--teal); font-weight:600; }
+  .lb-stab.active i { filter:none; }
   .lb-stab-meta { font-size:0.7rem; font-weight:400; opacity:0.65; margin-left:0.1rem; }
   .lb-outer { overflow-x:auto; background:white; border:1px solid var(--slate-mid); border-radius:var(--radius); box-shadow:var(--shadow); }
   .lb-table { width:100%; border-collapse:collapse; font-size:0.84rem; min-width:640px; }
@@ -760,10 +795,10 @@
   .lb-model-cell { display:flex; align-items:center; gap:0.3rem; font-family:var(--mono); font-size:0.76rem; font-weight:600; white-space:nowrap; }
   .lb-size-tag { font-size:0.65rem; font-weight:500; color:#94a3b8; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:3px; padding:0.05rem 0.3rem; letter-spacing:0.02em; }
   .lb-badge { font-size:0.68rem; padding:0.12rem 0.45rem; border-radius:100px; font-weight:600; white-space:nowrap; }
-  .lb-badge-frontier { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
-  .lb-badge-open     { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
-  .lb-badge-safety   { background:#faf5ff; color:#7c3aed; border:1px solid #e9d5ff; }
-  .lb-badge-deployed { background:#f8fafc; color:#64748b; border:1px solid #e2e8f0; }
+  .lb-badge-frontier { background:#fef3c7; color:#92400e; border:1px solid #fcd34d; }
+  .lb-badge-open     { background:#dbeafe; color:#1e40af; border:1px solid #93c5fd; }
+  .lb-badge-safety   { background:#ffe4e6; color:#9f1239; border:1px solid #fca5a5; }
+  .lb-badge-deployed { background:#f1f5f9; color:#64748b; border:1px solid #cbd5e1; }
   .lb-cfg { font-size:0.7rem; padding:0.1rem 0.42rem; border-radius:4px; font-family:var(--mono); white-space:nowrap; border:1px solid; }
   .lb-cfg-instr   { background:#eff6ff; color:#2563eb; border-color:#bfdbfe; }
   .lb-cfg-example { background:#fffbeb; color:#b45309; border-color:#fde68a; }
@@ -790,7 +825,7 @@
   .lb-metric-toggle { display:flex; align-items:center; gap:0.22rem; }
   .lb-mtab { display:inline-flex; align-items:center; padding:0.26rem 0.68rem; border:1px solid var(--slate-mid); border-radius:6px; background:white; cursor:pointer; font-size:0.74rem; font-family:var(--mono); font-weight:700; color:var(--muted); transition:background 0.12s, color 0.12s, border-color 0.12s; letter-spacing:0.01em; }
   .lb-mtab:hover:not(.active) { background:var(--slate); color:var(--text); }
-  .lb-mtab.active { background:var(--teal); color:white; border-color:var(--teal); }
+  .lb-mtab.active { background:rgba(14,165,201,0.10); color:var(--teal); border-color:var(--teal); font-weight:600; }
   /* award icons in rank cell */
   .lb-rank-cell i.fa-award { font-size:0.95em; vertical-align:-0.04em; }
   /* setup cell */
@@ -860,8 +895,17 @@
   <ul class="nav-links">
     <li><a href="#overview">Overview</a></li>
     <li><a href="#dataset">Dataset</a></li>
-    <li><a href="#evaluation">Evaluation</a></li>
-    <li><a href="#analysis">Analysis</a></li>
+    <li><a href="#evaluation">Leaderboard</a></li>
+    <li class="nav-dropdown">
+      <a href="#analysis">Extended Analysis <i class="fa-regular fa-square-caret-down" style="color:var(--teal); font-size:0.85em;"></i></a>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-menu-inner">
+          <a href="#analysis">Instruction-Driven</a>
+          <a href="#analysis-example">Example-Driven</a>
+          <a href="#consistency">Consistency</a>
+        </div>
+      </div>
+    </li>
     <li><a href="#efficiency">Efficiency</a></li>
     <li><a href="#citation">Cite</a></li>
   </ul>
@@ -967,7 +1011,7 @@
           </div>
           <div class="paradigm-stat">
             <span>Open-weight throughput</span>
-            <span class="paradigm-stat-val">~1 post / min (50× slower)</span>
+            <span class="paradigm-stat-val">1-9 posts / min </span>
           </div>
           <div class="paradigm-stat">
             <span>Frontier API cost</span>
@@ -1028,13 +1072,14 @@
   <div class="container">
     <div class="section-label">Dataset</div>
     <h2>ModerationBench Dataset</h2>
-    <p class="section-intro">Four complementary subsets of 1,000 multimodal posts each, targeting distinct evaluation axes. All posts collected from Bluesky's public firehose (March–December 2025), retaining text, images, and thumbnails.</p>
+    <p class="section-intro">Four complementary subsets of 1,000 multimodal posts each, targeting distinct evaluation axes. All posts collected from Bluesky's public firehose spanning March–December 2025, enabling the consideration of texts, images, thumbnails, and videos posted on the platform.</p>
     <div class="subsets-grid">
       <div class="subset-card blue reveal">
         <div class="subset-icon"><i class="fa-solid fa-shuffle" style="color:#3b82f6;"></i></div>
         <h3>Random Posts</h3>
         <div class="subset-n">N = 1,000</div>
-        <p class="subset-q">"How effectively can harmful posts be identified in the wild on random platform traffic?"</p>
+        <!-- <p class="subset-q">"How effectively can harmful posts be identified in random in-the-wild platform traffic?"</p> -->
+        <p class="subset-q">"How effectively can harmful posts be identified in random in-the-wild platform traffic?"</p>
         <div class="subset-stats">
           <div class="subset-stat"><span><i class="fa-solid fa-users" style="color:var(--teal); margin-right:0.35em;"></i>Human unsafe</span><span>2.7%</span></div>
           <div class="stat-bar-wrap"><div class="stat-bar" style="width:2.7%"></div></div>
@@ -1058,7 +1103,8 @@
         <div class="subset-icon"><i class="fa-solid fa-magnifying-glass" style="color:#f97316;"></i></div>
         <h3>Near-moderated Posts</h3>
         <div class="subset-n">N = 1,000</div>
-        <p class="subset-q">"Can moderation coverage extend to harmful posts that went unflagged on the platform?"</p>
+        <!-- <p class="subset-q">"Can moderation coverage extend to harmful posts that went unflagged on the platform?"</p> -->
+        <p class="subset-q">"How much can moderation coverage be extended to harmful posts that the platform missed?"</p>
         <div class="subset-stats">
           <div class="subset-stat"><span><i class="fa-solid fa-users" style="color:var(--teal); margin-right:0.35em;"></i>Human unsafe</span><span>34.6%</span></div>
           <div class="stat-bar-wrap"><div class="stat-bar" style="width:34.6%"></div></div>
@@ -1070,7 +1116,7 @@
         <div class="subset-icon"><i class="fa-solid fa-square-check" style="color:#22c55e;"></i></div>
         <h3>Safe Posts</h3>
         <div class="subset-n">N = 1,000</div>
-        <p class="subset-q">"How prone is a moderation system to false positives on genuinely safe content?"</p>
+        <p class="subset-q">"How effective is a moderation system in avoiding flagging genuinely safe content?"</p>
         <div class="subset-stats">
           <div class="subset-stat"><span><i class="fa-solid fa-users" style="color:var(--teal); margin-right:0.35em;"></i>Human unsafe</span><span>0.0%</span></div>
           <div class="stat-bar-wrap"><div class="stat-bar" style="width:0%"></div></div>
@@ -1109,30 +1155,31 @@
     <!-- Paradigm 01: Instruction-Driven -->
     <div class="paradigm-subhead">
       <div class="section-label">Paradigm 01 · Instruction-Driven</div>
-      <h3><img src="icons/bluesky.svg" style="width:0.75em;height:0.75em;vertical-align:-0.05em;margin-right:0.25em;opacity:0.85;" alt="">Policy Structure</h3>
+      <h3><img src="icons/bluesky.svg" style="width:0.75em;height:0.75em;vertical-align:-0.05em;margin-right:0.25em;opacity:0.85;" alt="">Moderation Policy Structure</h3>
     </div>
-    <p class="section-intro" style="margin-top:0; margin-bottom:1.8rem;">VLMs are supplied with Bluesky's written policy across three axes — What, Why &amp; How — tested at four levels of granularity to assess whether richer context leads to better decisions.</p>
+    <p class="section-intro" style="margin-top:0; margin-bottom:1.8rem;">VLMs are supplied with the text of Bluesky's platform policy, varying the granularity to understand which dimensions across the What, Why &amp; How are critical in improving moderation effectiveness.</p>
+    <p class="ex-group-note">To comprehensively analyze <strong style="color:rgba(255,255,255,0.7);">effectiveness at different policy granularities</strong>, VLMs are provided <strong style="color:rgba(255,255,255,0.7);">four different settings</strong>: Labels, Labels+Rationale, Labels+Details, and the Full Policy with Labels+Rationale+Details.</p>
     <div class="policy-grid">
       <div class="policy-card reveal">
-        <div class="policy-tag">Labels · What?</div>
+        <div class="policy-tag">Moderate What?</div>
         <h3>Policy Labels</h3>
         <div class="policy-meta">11 labels · 242 words</div>
-        <p>Definition per content label, including <code>other</code> &amp; <code>safe</code>. Tells the model <em>which harms</em> to detect using Bluesky's harm taxonomy.</p>
-        <span class="policy-num" style="margin-top:0.8rem;">11</span>
+        <p>Definition of 9 BMS content labels, plus <code>other</code> &amp; <code>safe</code>. Tells the model <em>which harms</em> to detect using Bluesky's harm taxonomy.</p>
+        <!-- <span class="policy-num" style="margin-top:0.8rem;">11</span> -->
       </div>
       <div class="policy-card reveal">
-        <div class="policy-tag">Rationale · Why?</div>
+        <div class="policy-tag">Moderate Why?</div>
         <h3>Policy Rationale</h3>
         <div class="policy-meta">88 rules · 1,574 words</div>
-        <p>Four principles &amp; protected expressions from Community Guidelines. Conveys the platform's <em>philosophy</em> behind moderation decisions.</p>
-        <span class="policy-num" style="margin-top:0.8rem;">88</span>
+        <p>Four principles &amp; protected expressions from Community Guidelines. Conveys platform's <em>philosophy</em> behind moderation decisions.</p>
+        <!-- <span class="policy-num" style="margin-top:0.8rem;">88</span> -->
       </div>
       <div class="policy-card reveal">
-        <div class="policy-tag">Details · How?</div>
+        <div class="policy-tag">Moderate How?</div>
         <h3>Policy Details</h3>
         <div class="policy-meta">78 rules · 1,198 words</div>
-        <p>Scope of prohibitions and exceptions per category. Governs the <em>operationalization</em> — specific rules for what is and isn't flagged.</p>
-        <span class="policy-num" style="margin-top:0.8rem;">78</span>
+        <p>Scope of prohibitions and exceptions per label. Governs <em>operationalization</em>: specific rules for what should and shouldn't be flagged.</p>
+        <!-- <span class="policy-num" style="margin-top:0.8rem;">78</span> -->
       </div>
     </div>
     <hr class="paradigm-divider">
@@ -1140,39 +1187,39 @@
     <!-- Paradigm 02: Example-Driven -->
     <div class="paradigm-subhead">
       <div class="section-label">Paradigm 02 · Example-Driven</div>
-      <h3>Example Selection Strategies</h3>
+      <h3><i class="fa-solid fa-database" style="margin-right:0.4em;opacity:0.75;"></i>Example Selection Strategies</h3>
     </div>
-    <p class="section-intro" style="margin-top:0; margin-bottom:1rem;">VLMs are guided through prior BMS moderation decisions. Three strategies control how in-context examples are selected from BMS-moderated posts.</p>
-    <p class="ex-group-note">All strategies include only <strong style="color:rgba(255,255,255,0.7);">policy labels (What)</strong> in the prompt — no rationale or details. To stay within context limits, classification is decomposed into <strong style="color:rgba(255,255,255,0.7);">three independent group-level calls</strong> per post — <em>sexual</em> (porn, sexual, figurative, nudity), <em>graphic</em> (graphic-media, self-harm), <em>hostile</em> (intolerance, rude, threat) — with the final label aggregated across groups. Embeddings are produced by <strong style="color:rgba(255,255,255,0.7);">Qwen3-VL-Embedding-2B</strong> (2048-dim multimodal vectors, ℓ₂-normalized) and indexed with <code style="background:rgba(255,255,255,0.08);color:var(--teal);padding:0.1em 0.3em;border-radius:3px;font-size:0.85em;">faiss.IndexFlatIP</code> for efficient inner-product search.</p>
+    <p class="section-intro" style="margin-top:0; margin-bottom:1rem;">VLMs are provided prior exemplars of BMS moderation decisions of social media posts. Three strategies control how example posts are selected for in-context provision.</p>
+    <p class="ex-group-note">Owing to limited context limits of open-weight models, moderation prediction is performed with <strong style="color:rgba(255,255,255,0.7);">multiple inference calls</strong> per post, with the final label aggregated across the predictions from each call. For strategies involving vector-based search, multimodal content is converted to vector embeddings by <strong style="color:rgba(255,255,255,0.7);">Qwen3-VL-Embedding-2B</strong> and indexed with <code style="background:rgba(255,255,255,0.08);color:var(--teal);padding:0.1em 0.3em;border-radius:3px;font-size:0.85em;">faiss.IndexFlatIP</code> for efficient inner-product search. The text prompt includes only <strong style="color:rgba(255,255,255,0.7);">policy labels (What)</strong> in the prompt. </p>
     <div class="ex-strategy-grid">
       <div class="ex-strategy-card reveal">
         <div class="ex-strategy-num">Strategy 01</div>
         <div class="ex-strategy-tag">Random</div>
         <h3>Random Sampling</h3>
-        <p>10 BMS-moderated posts per label are <strong>randomly sampled</strong>, capturing the natural diversity of violations without selection bias. No embedding computation required. Each group-level call receives K=10 labeled examples per unsafe label plus K=10 safe contrast posts.</p>
+        <p>10 BMS-moderated posts for the nine labels are <strong>randomly sampled</strong>, capturing the natural diversity of violations without selection bias. No embedding computation required and these examples are <strong>static and pre-computed</strong> for all input instances.</p>
       </div>
       <div class="ex-strategy-card reveal">
         <div class="ex-strategy-num">Strategy 02</div>
         <div class="ex-strategy-tag">Prototypical</div>
         <h3>Prototypical Exemplars</h3>
-        <p>The <strong>mean embedding</strong> of all posts in each label is computed; a <code>faiss.IndexFlatIP</code> index is then queried to retrieve the 10 nearest neighbors to that centroid via cosine similarity. These <strong>static, pre-computed exemplars</strong> — identical for every query — represent the most characteristic violation of each type.</p>
+        <p>The <strong>mean embedding</strong> of all posts in each label is computed; a <code>faiss.IndexFlatIP</code> index is then queried to retrieve the 10 nearest neighbors to that centroid. These <strong>static, pre-computed exemplars</strong> represent the most characteristic violation of each type.</p>
       </div>
       <div class="ex-strategy-card reveal">
         <div class="ex-strategy-num">Strategy 03</div>
         <div class="ex-strategy-tag">Contextual</div>
         <h3>Contextual Retrieval</h3>
-        <p>For each query post, the <code>faiss.IndexFlatIP</code> index of all moderated posts is searched to retrieve the 10 most similar posts per label (100 total). Because this exceeds open-weight context limits, examples are re-ranked by similarity, split into <strong>10 groups processed independently</strong>, and the final label is resolved by <strong>majority voting</strong> — at ≈64× higher latency than instruction-driven.</p>
+        <p>Each query post is converted to its embedding, then the <code>faiss.IndexFlatIP</code> index of <strong>all moderated posts</strong> is searched to retrieve the 10 most similar posts per label for the query post. Hence, these exemplars dynamically change for each input post.</p>
       </div>
     </div>
-    <p class="ex-safe-note">In all three strategies, K=10 <em>safe</em> posts from the curated Safe Posts collection serve as contrast examples. Neither safe nor labeled example subsets overlap with the ModerationBench evaluation data.</p>
+    <p class="ex-safe-note">In all three strategies, <em>10 safe</em> posts from a larger curated Safe Post collection serve as contrasting examples. No posts selected as exemplars overlap with the ModerationBench evaluation data.</p>
   </div>
 </section>
 
 <!-- EVALUATION -->
 <section class="section" id="evaluation">
   <div class="container">
-    <div class="section-label">Evaluation</div>
-    <h2>Models &amp; Leaderboard</h2>
+    <div class="section-label">Leaderboard</div>
+    <h2>Moderation Leaderboard</h2>
 
     <hr class="subsec-divider">
 
@@ -1255,12 +1302,6 @@
     <div id="lb-wrap" class="reveal"></div>
 
     <div class="lb-legend reveal">
-      <span>F₁ :</span>
-      <span class="lb-legend-dot" style="background:#22c55e"></span><span>≥ 0.55</span>
-      <span class="lb-legend-dot" style="background:#06b6d4"></span><span>≥ 0.45</span>
-      <span class="lb-legend-dot" style="background:#eab308"></span><span>≥ 0.35</span>
-      <span class="lb-legend-dot" style="background:#f97316"></span><span>&lt; 0.35</span>
-      <span style="color:var(--slate-mid);margin:0 0.25rem">·</span>
       <span>† llama-guard evaluated on Bluesky's policy &nbsp;·&nbsp; ▲ llama-guard evaluated on its own built-in taxonomy</span>
     </div>
 
@@ -1268,7 +1309,7 @@
 </section>
 
 <!-- ANALYSIS: INSTRUCTION-DRIVEN -->
-<section class="section" id="analysis">
+<section class="section section-sep" id="analysis">
   <div class="container">
     <div class="section-label">Analysis</div>
     <h2>Analysis of Instruction-Driven Moderation</h2>
@@ -1277,6 +1318,8 @@
 
     <div class="section-label">Policy Instruction Levels</div>
     <h3 class="subsec-h3">How do different policy instruction levels impact moderation?</h3>
+
+    <p class="section-intro">Increased policy details in the instruction-driven paradigm ground VLMs in the platform's policy operationalization, reducing overflagging on random platform traffic and improving moderation performance.</p>
 
     <!-- F1 Dot-Track Chart -->
     <div class="chart-section reveal" style="margin-top:1.5rem;">
@@ -1294,45 +1337,81 @@
       </div>
     </div>
 
+
+  </div>
+</section>
+
+<!-- ANALYSIS: EXAMPLE-DRIVEN -->
+<section class="section section-sep" id="analysis-example">
+  <div class="container">
+    <div class="section-label">Analysis</div>
+    <h2>Analysis of Example-Driven Moderation</h2>
+    <p class="section-intro">We evaluate three example selection strategies — Random, Prototypical, and Contextual — and compare their moderation decisions against both human annotations and the instruction-driven paradigm.</p>
+
     <hr class="subsec-divider">
 
+    <div class="section-label">Effectiveness</div>
+    <h3 class="subsec-h3">How do different example strategies affect F₁?</h3>
+
+    <div class="chart-section reveal" style="margin-top:1.5rem;">
+      <div class="ef-chart-title">F₁ on Random Posts · Example-Driven · all strategies</div>
+      <div class="ef-canvas-wrap">
+        <canvas id="egf1-canvas" style="height:420px;"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-section reveal">
+      <div class="ef-chart-title">Flagging Rate on Random Posts (%) · Example-Driven</div>
+      <div class="ef-canvas-wrap">
+        <canvas id="egflag-canvas" style="height:320px;"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSISTENCY ANALYSIS -->
+<section class="section section-sep" id="consistency">
+  <div class="container">
     <div class="section-label">Consistency</div>
-    <h3 class="subsec-h3">Analyzing decisions and judgments across VLMs</h3>
-    <p class="section-intro">We study both <em>decision consistency</em> (do models assign the same label?) and <em>judgment consistency</em> (do they rely on the same policy rules?), across instruction levels, model pairs, and moderation paradigms.</p>
+    <h2>Consistency Analysis</h2>
+    <p class="section-intro">We study both <em>decision consistency</em> (agreements in moderation predictions) and <em>judgment consistency</em> (alignment of decisions with policy rules), across instruction levels, model pairs, and moderation paradigms. Since extensive policy rules are only provided in the instruction-driven paradigm, we study judgment consistency only for that paradigm.</p>
+
 
     <div class="consistency-stats">
       <div class="con-stat-card reveal">
         <span class="con-stat-num">95–96%</span>
-        <div class="con-stat-label">Intra-model Stability</div>
-        <div class="con-stat-sub">Instance-level predictions remain stable as policy detail increases (gemma4: 95%, qwen3.5: 96%)</div>
+        <div class="con-stat-label">Intra-model Decision Stability</div>
+        <div class="con-stat-sub">Instance-level prediction on whether specific posts should be flagged remain stable across policy instruction granularities.</div>
       </div>
       <div class="con-stat-card reveal">
-        <span class="con-stat-num">0.78</span>
-        <div class="con-stat-label">Gwet's AC1 (Moderated)</div>
-        <div class="con-stat-sub">Inter-model agreement between gemma4 &amp; qwen3.5 on Moderated Posts — the most challenging subset</div>
+        <span class="con-stat-num">AC1 ≈ 0.78</span>
+        <div class="con-stat-label">Gwet's AC1 on Moderated</div>
+        <div class="con-stat-sub">High decision agreement between most capable open-weight VLMs on Moderated Posts in instruction-driven: gemma4 &amp; qwen3.5.</div>
       </div>
       <div class="con-stat-card reveal">
-        <span class="con-stat-num">50.3%</span>
+        <span class="con-stat-num">>=40%</span>
         <div class="con-stat-label">Policy Rules Never Cited</div>
-        <div class="con-stat-sub">Of 177 policy rules, gemma4 never cites 50.3%; qwen3.5 never cites 47.5%; 40.1% cited by neither model</div>
+        <div class="con-stat-sub">Instruction-driven VLMs rely on sparse subset of policy rules. gemma4 never cites 50.3%; qwen3.5 never cites 47.5%; 40.1% by neither.</div>
       </div>
       <div class="con-stat-card reveal">
         <span class="con-stat-num">86.5%</span>
         <div class="con-stat-label">Cross-Paradigm Agreement</div>
-        <div class="con-stat-sub">gemma4 assigns the same label whether using instruction-driven or example-driven prompting</div>
+        <div class="con-stat-sub">VLM decisions, e.g., for gemma4, show high agreement across instruction-driven and example-driven paradigms.</div>
       </div>
     </div>
 
+    <hr class="subsec-divider">
+
     <!-- Decision Flow Sankey -->
     <div style="margin-top:2.5rem;" class="reveal">
-      <h3 style="font-family:var(--serif); font-weight:400; font-size:1.4rem; margin-bottom:0.3rem;">Decision Flow Between Model Pairs</h3>
-      <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:1rem; max-width:680px;">Each stacked bar shows a model's label distribution across 898 posts. Ribbons connect how each individual post is labeled by both models — straight ribbons indicate agreement, crossing ribbons show disagreement. Hover over a bar segment to see counts.</p>
+      <h3 style="font-family:var(--serif); font-weight:400; font-size:1.4rem; margin-bottom:0.3rem;">Decision Agreements Between Model Pairs</h3>
+      <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:1rem; max-width:680px;">Visualizing agreements of moderation decisions between VLMs and across paradigms (for gemma4). Decisions between models remain largely consistent with certain systematic differences. Hover over bar segments or ribbons to see more.</p>
 
       <div class="sankey-pair-tabs">
-        <button class="sankey-tab active" onclick="setSankeyPair('gemma_vs_qwen',this)">Gemma4 vs Qwen3.5</button>
-        <button class="sankey-tab" onclick="setSankeyPair('gemini_vs_gpt',this)">Gemini3.5 vs GPT-5.6</button>
-        <button class="sankey-tab" onclick="setSankeyPair('gemma_vs_gemini',this)">Gemma4 vs Gemini3.5</button>
-        <button class="sankey-tab" onclick="setSankeyPair('gemma_instr_vs_fewshot',this)">Gemma4: Instruction vs Example</button>
+        <button class="sankey-tab active" onclick="setSankeyPair('gemma_vs_qwen',this)"><img src="icons/gemma-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;">Gemma4 vs <img src="icons/qwen-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;margin-left:0.1em;">Qwen3.5</button>
+        <button class="sankey-tab" onclick="setSankeyPair('gemini_vs_gpt',this)"><img src="icons/gemini-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;">Gemini3.5 vs <img src="icons/openai.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;margin-left:0.1em;">GPT-5.6</button>
+        <button class="sankey-tab" onclick="setSankeyPair('gemma_vs_gemini',this)"><img src="icons/gemma-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;">Gemma4 vs <img src="icons/gemini-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;margin-left:0.1em;">Gemini3.5</button>
+        <button class="sankey-tab" onclick="setSankeyPair('gemma_instr_vs_fewshot',this)"><img src="icons/gemma-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;">Gemma4: Instruction vs Example</button>
       </div>
 
       <div style="position:relative; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; overflow:hidden;">
@@ -1342,9 +1421,97 @@
 
     </div>
 
+    <hr class="subsec-divider">
+
+    <!-- Citation Distribution Chart -->
+    <div style="margin-top:2.5rem;">
+      <h3 style="font-family:var(--serif); font-weight:400; font-size:1.4rem; margin-bottom:0.3rem;">Which Policy Rules Do Models Actually Cite?</h3>
+      <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:0.8rem; max-width:680px;">
+        Each bar represents one of 177 policy rules. Height shows what fraction of that model's total citations went to that rule. Color encodes the policy component type. Hover any bar to see the rule text and citation rate.
+      </p>
+
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:0.4rem;">
+        <div class="tab-group" id="cit-model-tabs">
+          <button class="tab-btn active" onclick="setCitModel('gemma4',this)">gemma4</button>
+          <button class="tab-btn" onclick="setCitModel('qwen3.5',this)">qwen3.5</button>
+          <button class="tab-btn" onclick="setCitModel('gemini3.5',this)">gemini3.5</button>
+          <button class="tab-btn" onclick="setCitModel('gpt5.6',this)">gpt5.6</button>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div style="display:flex; gap:1.2rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
+          <span style="width:14px;height:14px;background:#4C72B0;border-radius:3px;display:inline-block;"></span>Rationale
+        </div>
+        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
+          <span style="width:14px;height:14px;background:#DD8452;border-radius:3px;display:inline-block;"></span>Definition
+        </div>
+        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
+          <span style="width:14px;height:14px;background:#55A868;border-radius:3px;display:inline-block;"></span>Details (Scope)
+        </div>
+        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
+          <span style="width:14px;height:14px;background:#C44E52;border-radius:3px;display:inline-block;"></span>Details (Notes)
+        </div>
+      </div>
+
+      <div style="position:relative; width:100%; overflow:hidden; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white;">
+        <canvas id="cit-canvas" style="display:block; width:100%;"></canvas>
+        <div id="cit-tooltip" style="
+          position:absolute; display:none; z-index:10;
+          background:rgba(15,23,42,0.72); color:white;
+          padding:0.6rem 0.8rem; border-radius:6px;
+          font-size:0.75rem; line-height:1.55; max-width:280px;
+          pointer-events:none; box-shadow:0 4px 20px rgba(0,0,0,0.25);
+          backdrop-filter: blur(2px);
+        "></div>
+      </div>
+
+      <!-- Compare Model Judgments -->
+      <h3 style="margin-top:2.5rem; margin-bottom:0.4rem; font-family:var(--serif); font-weight:400; font-size:1.4rem;">Compare Model Judgments</h3>
+      <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:0.8rem; max-width:680px;">
+        Citation distributions for both models in a pair, filtered to posts where their decisions agree or disagree. Each rule shows a mirrored bar chart — one model above the axis, the other below — so differences in rule reliance are immediately visible.
+      </p>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:0.4rem;">
+        <div class="tab-group" id="cit-cmp-pair-tabs">
+          <button class="tab-btn active" onclick="setCitCmpPair('gemma_vs_qwen',this)"><img src="icons/gemma-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;">Gemma4 vs <img src="icons/qwen-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;margin-left:0.1em;">Qwen3.5</button>
+          <button class="tab-btn" onclick="setCitCmpPair('gemini_vs_gpt',this)"><img src="icons/gemini-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;">Gemini3.5 vs <img src="icons/openai.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;margin-left:0.1em;">GPT-5.6</button>
+        </div>
+        <div class="tab-group" id="cit-cmp-dec-tabs">
+          <button class="tab-btn active" onclick="setCitCmpDecision('agreed',this)">Decisions Agree</button>
+          <button class="tab-btn" onclick="setCitCmpDecision('disagreed',this)">Decisions Disagree</button>
+        </div>
+      </div>
+      <div id="cit-cmp-legend" style="display:flex; gap:1.4rem; flex-wrap:wrap; margin-bottom:0.5rem; font-size:0.78rem; color:var(--text-light);"></div>
+      <div style="position:relative; width:100%; overflow:hidden; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white;">
+        <canvas id="cit-compare-canvas" style="display:block; width:100%;"></canvas>
+        <div id="cit-compare-tooltip" style="position:absolute; display:none; z-index:10; background:rgba(15,23,42,0.82); color:white; padding:0.6rem 0.8rem; border-radius:6px; font-size:0.75rem; line-height:1.55; max-width:300px; pointer-events:none; box-shadow:0 4px 20px rgba(0,0,0,0.25); backdrop-filter:blur(2px);"></div>
+      </div>
+
+      <div class="consistency-stats" style="margin-top:1.2rem;">
+        <div class="con-stat-card reveal">
+          <span class="con-stat-num">JSD ≈ 0.08</span>
+          <div class="con-stat-label">Agreed: Aligned Citations</div>
+          <div class="con-stat-sub">When both models agree, citation distributions align closely (Spearman ρ ≈ 0.82) — they invoke the same policy rules for the same reasons.</div>
+        </div>
+        <div class="con-stat-card reveal">
+          <span class="con-stat-num">JSD = 0.36</span>
+          <div class="con-stat-label">Disagreed: Divergent Citations</div>
+          <div class="con-stat-sub">When models disagree, citations diverge substantially (Spearman ρ drops to 0.58) — reflecting genuine policy interpretation differences, not random noise.</div>
+        </div>
+        <div class="con-stat-card reveal">
+          <span class="con-stat-num">κ = 0.27</span>
+          <div class="con-stat-label">Human Agreement on Disagreements</div>
+          <div class="con-stat-sub">Annotators themselves reach only fair agreement on posts where models disagree — confirming the ambiguity is real, not a model artifact.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="subsec-divider">
+
     <!-- Pluralism patterns -->
     <h3 style="margin-top:2.5rem; margin-bottom:0.5rem; font-family:var(--serif); font-weight:400; font-size:1.4rem;">Two Types of Moderation Pluralism</h3>
-    <p style="color:var(--text-light); font-size:0.88rem; margin-bottom:1rem;">When models disagree, their citation distributions diverge significantly (Spearman ρ drops from 0.82 → 0.58; JSD rises from 0.08 → 0.36). Two recurring patterns emerge:</p>
+    <p style="color:var(--text-light); font-size:0.88rem; margin-bottom:1rem; max-width:680px;">Model disagreements show systematic decision pluralism. When models disagree, their citation distributions diverge significantly (Spearman ρ drops from 0.82 → 0.58; JSD rises from 0.08 → 0.36). Two recurring patterns emerge:</p>
     <div class="pluralism-grid">
       <div class="pluralism-card reveal">
         <div class="pluralism-type">Pattern 1 · Unsafe Categorization</div>
@@ -1392,102 +1559,6 @@
       </div>
     </div>
 
-    <!-- Citation Distribution Chart -->
-    <div style="margin-top:2.5rem;">
-      <h3 style="font-family:var(--serif); font-weight:400; font-size:1.4rem; margin-bottom:0.3rem;">Which Policy Rules Do Models Actually Cite?</h3>
-      <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:1.5rem; max-width:680px;">
-        Each bar represents one of 177 policy rules. Height shows what fraction of that model's total citations went to that rule. Color encodes the policy component type. Hover any bar to see the rule text and citation rate.
-      </p>
-
-      <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1.2rem;">
-        <div class="tab-group" id="cit-model-tabs">
-          <button class="tab-btn active" onclick="setCitModel('gemma4',this)">gemma4</button>
-          <button class="tab-btn" onclick="setCitModel('qwen3.5',this)">qwen3.5</button>
-          <button class="tab-btn" onclick="setCitModel('gemini3.5',this)">gemini3.5</button>
-          <button class="tab-btn" onclick="setCitModel('gpt5.6',this)">gpt5.6</button>
-        </div>
-        <div class="tab-group" id="cit-subset-tabs">
-          <button class="tab-btn active" onclick="setCitSubset('overall',this)">Overall</button>
-          <button class="tab-btn" onclick="setCitSubset('agreed',this)">Agreed</button>
-          <button class="tab-btn" onclick="setCitSubset('disagreed',this)">Disagreed</button>
-        </div>
-      </div>
-
-      <!-- Legend -->
-      <div style="display:flex; gap:1.2rem; flex-wrap:wrap; margin-bottom:1rem;">
-        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
-          <span style="width:14px;height:14px;background:#4C72B0;border-radius:3px;display:inline-block;"></span>Rationale
-        </div>
-        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
-          <span style="width:14px;height:14px;background:#DD8452;border-radius:3px;display:inline-block;"></span>Definition
-        </div>
-        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
-          <span style="width:14px;height:14px;background:#55A868;border-radius:3px;display:inline-block;"></span>Details (Scope)
-        </div>
-        <div style="display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;color:var(--text-light);">
-          <span style="width:14px;height:14px;background:#C44E52;border-radius:3px;display:inline-block;"></span>Details (Notes)
-        </div>
-      </div>
-
-      <div style="position:relative; width:100%; overflow:hidden; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white;">
-        <canvas id="cit-canvas" style="display:block; width:100%;"></canvas>
-        <div id="cit-tooltip" style="
-          position:absolute; display:none; z-index:10;
-          background:rgba(15,23,42,0.72); color:white;
-          padding:0.6rem 0.8rem; border-radius:6px;
-          font-size:0.75rem; line-height:1.55; max-width:280px;
-          pointer-events:none; box-shadow:0 4px 20px rgba(0,0,0,0.25);
-          backdrop-filter: blur(2px);
-        "></div>
-      </div>
-
-      <div class="consistency-stats" style="margin-top:1.2rem;">
-        <div class="con-stat-card reveal">
-          <span class="con-stat-num">JSD ≈ 0.08</span>
-          <div class="con-stat-label">Agreed: Aligned Citations</div>
-          <div class="con-stat-sub">When both models agree, citation distributions align closely (Spearman ρ ≈ 0.82) — they invoke the same policy rules for the same reasons.</div>
-        </div>
-        <div class="con-stat-card reveal">
-          <span class="con-stat-num">JSD = 0.36</span>
-          <div class="con-stat-label">Disagreed: Divergent Citations</div>
-          <div class="con-stat-sub">When models disagree, citations diverge substantially (Spearman ρ drops to 0.58) — reflecting genuine policy interpretation differences, not random noise.</div>
-        </div>
-        <div class="con-stat-card reveal">
-          <span class="con-stat-num">κ = 0.27</span>
-          <div class="con-stat-label">Human Agreement on Disagreements</div>
-          <div class="con-stat-sub">Annotators themselves reach only fair agreement on posts where models disagree — confirming the ambiguity is real, not a model artifact.</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ANALYSIS: EXAMPLE-DRIVEN -->
-<section class="section" id="analysis-example">
-  <div class="container">
-    <div class="section-label">Analysis</div>
-    <h2>Analysis of Example-Driven Moderation</h2>
-    <p class="section-intro">We evaluate three example selection strategies — Random, Prototypical, and Contextual — and compare their moderation decisions against both human annotations and the instruction-driven paradigm.</p>
-
-    <hr class="subsec-divider">
-
-    <div class="section-label">Effectiveness</div>
-    <h3 class="subsec-h3">How do different example strategies affect F₁?</h3>
-
-    <div class="chart-section reveal" style="margin-top:1.5rem;">
-      <div class="ef-chart-title">F₁ on Random Posts · Example-Driven · all strategies</div>
-      <div class="ef-canvas-wrap">
-        <canvas id="egf1-canvas" style="height:420px;"></canvas>
-      </div>
-    </div>
-
-    <div class="chart-section reveal">
-      <div class="ef-chart-title">Flagging Rate on Random Posts (%) · Example-Driven</div>
-      <div class="ef-canvas-wrap">
-        <canvas id="egflag-canvas" style="height:320px;"></canvas>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1528,13 +1599,267 @@ function setCitModel(m, btn) {
   hoveredBarIdx = -1;
   drawCitChart();
 }
-function setCitSubset(s, btn) {
-  citSubset = s;
-  document.querySelectorAll("#cit-subset-tabs .tab-btn").forEach(b => b.classList.remove("active"));
+
+// ── Compare chart state ───────────────────────────────────────────────────────
+const CIT_CMP_PAIRS = {
+  'gemma_vs_qwen': { a:'gemma4',    b:'qwen3.5',  pairKey:'gemma_qwen',  labelA:'Gemma4',    labelB:'Qwen3.5'  },
+  'gemini_vs_gpt': { a:'gemini3.5', b:'gpt5.6',   pairKey:'gemini_gpt',  labelA:'Gemini3.5', labelB:'GPT-5.6'  },
+};
+const CIT_CMP_MODEL_COLORS = {
+  'gemma4':'#ea580c', 'qwen3.5':'#16a34a', 'gemini3.5':'#7c3aed', 'gpt5.6':'#374151'
+};
+let citCmpPair     = 'gemma_vs_qwen';
+let citCmpDecision = 'agreed';
+let hitAreasCmp    = [];
+let hoveredCmpIdx  = -1;
+
+function setCitCmpPair(p, btn) {
+  citCmpPair = p;
+  document.querySelectorAll("#cit-cmp-pair-tabs .tab-btn").forEach(b => b.classList.remove("active"));
   if (btn) btn.classList.add("active");
-  hoveredBarIdx = -1;
-  drawCitChart();
+  hoveredCmpIdx = -1;
+  drawCitCompareChart();
 }
+function setCitCmpDecision(d, btn) {
+  citCmpDecision = d;
+  document.querySelectorAll("#cit-cmp-dec-tabs .tab-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  hoveredCmpIdx = -1;
+  drawCitCompareChart();
+}
+
+function drawCitCompareChart() {
+  const canvas = document.getElementById("cit-compare-canvas");
+  if (!canvas) return;
+  const cfg = CIT_CMP_PAIRS[citCmpPair];
+  const pd  = CITATION_DATA.pairs[cfg.pairKey];
+  const sub = pd[citCmpDecision];
+
+  // Update legend
+  const legend = document.getElementById('cit-cmp-legend');
+  if (legend) {
+    legend.innerHTML = [
+      { m: cfg.a, label: cfg.labelA, arrow: '▲' },
+      { m: cfg.b, label: cfg.labelB, arrow: '▼' }
+    ].map(({ m, label, arrow }) =>
+      `<span style="display:flex;align-items:center;gap:0.35rem;">
+        <span style="width:14px;height:14px;background:${CIT_CMP_MODEL_COLORS[m]};border-radius:3px;display:inline-block;opacity:0.85;"></span>
+        <span style="opacity:0.55;font-size:0.72rem;">${arrow}</span>${label}
+      </span>`
+    ).join('');
+  }
+
+  const ctx  = canvas.getContext("2d");
+  const wrap = canvas.parentElement;
+  const dpr  = window.devicePixelRatio || 1;
+  const W    = wrap.clientWidth;
+  const H    = 460;
+  canvas.style.height = H + "px";
+  canvas.width  = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+  ctx.scale(dpr, dpr);
+
+  const ML = 52, MR = 14, MT = 54, MB = 28;
+  const chartW   = W - ML - MR;
+  const chartH   = H - MT - MB;
+  const halfH    = chartH / 2;
+  const centerY  = MT + halfH;
+  const N        = CITATION_DATA.policy_rules.length;
+  const barSpacing = chartW / N;
+  const barW     = barSpacing * 0.84;
+  const barX0    = i => ML + i * barSpacing + (barSpacing - barW) / 2;
+  const FS_SM    = 9.5;
+
+  const ruleIds = CITATION_DATA.policy_rules.map(r => String(r.id));
+  const pctsA   = ruleIds.map(id => sub.a[id] || 0);
+  const pctsB   = ruleIds.map(id => sub.b[id] || 0);
+  const maxPct  = (Math.max(...pctsA, ...pctsB) || 1) * 1.15;
+  const scl     = halfH / maxPct;
+
+  // Clear
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, W, H);
+
+  // Band backgrounds (full height)
+  CITATION_DATA.rationale_bands.forEach((band, bi) => {
+    const x0 = ML + band.start_x * barSpacing;
+    const x1 = ML + (band.end_x + 1) * barSpacing;
+    ctx.fillStyle = RAT_BAND_BG[bi]; ctx.globalAlpha = 0.72;
+    ctx.fillRect(x0, MT, x1 - x0, chartH); ctx.globalAlpha = 1;
+    ctx.strokeStyle = "#c0c0c0"; ctx.lineWidth = 0.7;
+    ctx.beginPath(); ctx.moveTo(x0, MT); ctx.lineTo(x0, MT + chartH); ctx.stroke();
+  });
+  CITATION_DATA.label_bands.forEach(band => {
+    const x0 = ML + band.start_x * barSpacing;
+    const x1 = ML + (band.end_x + 1) * barSpacing;
+    const col = LABEL_BAND_COLORS[band.label] || "#999";
+    ctx.fillStyle = col; ctx.globalAlpha = 0.10;
+    ctx.fillRect(x0, MT, x1 - x0, chartH); ctx.globalAlpha = 1;
+    ctx.strokeStyle = col; ctx.lineWidth = 0.9;
+    ctx.beginPath(); ctx.moveTo(x0, MT); ctx.lineTo(x0, MT + chartH); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x1, MT); ctx.lineTo(x1, MT + chartH); ctx.stroke();
+  });
+
+  // Grid lines (symmetric above and below center)
+  ctx.strokeStyle = "#e2e8f0"; ctx.lineWidth = 0.6; ctx.setLineDash([3, 3]);
+  for (let s = 1; s <= 3; s++) {
+    const dy = halfH * s / 3;
+    [centerY - dy, centerY + dy].forEach(y => {
+      ctx.beginPath(); ctx.moveTo(ML, y); ctx.lineTo(ML + chartW, y); ctx.stroke();
+    });
+  }
+  ctx.setLineDash([]);
+
+  // Y-axis labels (positive magnitude on both sides)
+  ctx.fillStyle = "#94a3b8"; ctx.font = `${FS_SM}px DM Mono,monospace`;
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  ctx.fillText("0%", ML - 5, centerY);
+  for (let s = 1; s <= 3; s++) {
+    const pct = maxPct * s / 3;
+    const yUp = centerY - pct * scl, yDn = centerY + pct * scl;
+    if (yUp >= MT)         ctx.fillText(pct.toFixed(1) + "%", ML - 5, yUp);
+    if (yDn <= MT + chartH) ctx.fillText(pct.toFixed(1) + "%", ML - 5, yDn);
+  }
+
+  // Draw bars (A up, B down from center axis)
+  hitAreasCmp = [];
+  const colA = CIT_CMP_MODEL_COLORS[cfg.a];
+  const colB = CIT_CMP_MODEL_COLORS[cfg.b];
+  CITATION_DATA.policy_rules.forEach((rule, i) => {
+    const x  = barX0(i);
+    const hA = Math.max(pctsA[i] * scl, pctsA[i] > 0 ? 1.5 : 0);
+    const hB = Math.max(pctsB[i] * scl, pctsB[i] > 0 ? 1.5 : 0);
+    const isH = i === hoveredCmpIdx;
+    ctx.globalAlpha = isH ? 1 : 0.82;
+    if (hA > 0) { ctx.fillStyle = colA; ctx.fillRect(x, centerY - hA, barW, hA); }
+    if (hB > 0) { ctx.fillStyle = colB; ctx.fillRect(x, centerY,      barW, hB); }
+    if (isH) {
+      ctx.globalAlpha = 1;
+      if (hA > 0) { ctx.strokeStyle = colA; ctx.lineWidth = 1; ctx.strokeRect(x, centerY - hA, barW, hA); }
+      if (hB > 0) { ctx.strokeStyle = colB; ctx.lineWidth = 1; ctx.strokeRect(x, centerY,      barW, hB); }
+    }
+    ctx.globalAlpha = 1;
+    hitAreasCmp.push({ xl: ML + i * barSpacing, xr: ML + (i+1) * barSpacing, rule, pctA: pctsA[i], pctB: pctsB[i] });
+  });
+
+  // Center axis + Y axis
+  ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(ML, centerY); ctx.lineTo(ML + chartW, centerY); ctx.stroke();
+  ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 0.7;
+  ctx.beginPath(); ctx.moveTo(ML, MT); ctx.lineTo(ML, MT + chartH); ctx.stroke();
+
+  // Rationale band section labels — just below label-name pills, matching drawCitChart
+  const ratLabelY = MT + 62;
+  CITATION_DATA.rationale_bands.forEach(band => {
+    const x0 = ML + band.start_x * barSpacing, x1 = ML + (band.end_x + 1) * barSpacing;
+    const xM = (x0 + x1) / 2;
+    ctx.save(); ctx.translate(xM, ratLabelY); ctx.rotate(-Math.PI / 2);
+    ctx.font = `bold 11px DM Sans,sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    const tw = ctx.measureText(band.name).width, th = 15;
+    const r = 3, bx = -tw/2 - 4, by = -th/2, bw2 = tw + 8, bh2 = th;
+    ctx.fillStyle = "rgba(255,255,255,0.90)";
+    ctx.beginPath();
+    ctx.moveTo(bx + r, by); ctx.lineTo(bx + bw2 - r, by); ctx.arcTo(bx+bw2, by, bx+bw2, by+r, r);
+    ctx.lineTo(bx + bw2, by + bh2 - r); ctx.arcTo(bx+bw2, by+bh2, bx+bw2-r, by+bh2, r);
+    ctx.lineTo(bx + r, by + bh2); ctx.arcTo(bx, by+bh2, bx, by+bh2-r, r);
+    ctx.lineTo(bx, by + r); ctx.arcTo(bx, by, bx+r, by, r); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#374151"; ctx.fillText(band.name, 0, 0);
+    ctx.restore();
+  });
+
+  // Label band names — same as drawCitChart: rotated at MT+40, ABOVE_LABELS above chart
+  const ABOVE_LABELS  = new Set(["S10", "S0"]);
+  const LABEL_FS      = 9.5;
+  const labelCenterY  = MT + 40;
+
+  CITATION_DATA.label_bands.forEach(band => {
+    if (ABOVE_LABELS.has(band.label)) return;
+    const x0 = ML + band.start_x * barSpacing, x1 = ML + (band.end_x + 1) * barSpacing;
+    const xM = (x0 + x1) / 2;
+    const col = LABEL_BAND_COLORS[band.label] || "#999", tc = readableColor(col);
+    ctx.save(); ctx.translate(xM, labelCenterY); ctx.rotate(-Math.PI / 2);
+    ctx.font = `bold ${LABEL_FS}px DM Sans,sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    const tw = ctx.measureText(band.name).width, pad = 3;
+    ctx.fillStyle = "rgba(255,255,255,0.90)";
+    ctx.fillRect(-tw/2 - pad, -LABEL_FS/2 - pad/2, tw + pad*2, LABEL_FS + pad);
+    ctx.fillStyle = tc; ctx.fillText(band.name, 0, 0);
+    ctx.restore();
+  });
+
+  let aboveIdx = 0;
+  CITATION_DATA.label_bands.forEach(band => {
+    if (!ABOVE_LABELS.has(band.label)) return;
+    const xM  = ML + (band.start_x + band.end_x + 1) / 2 * barSpacing;
+    const col = LABEL_BAND_COLORS[band.label] || "#999", tc = readableColor(col);
+    const textY = 4 + aboveIdx * 18;
+    ctx.save(); ctx.strokeStyle = tc; ctx.lineWidth = 0.8; ctx.setLineDash([2, 2]);
+    ctx.beginPath(); ctx.moveTo(xM, textY + LABEL_FS + 2); ctx.lineTo(xM, MT); ctx.stroke();
+    ctx.setLineDash([]); ctx.restore();
+    ctx.font = `bold ${LABEL_FS}px DM Sans,sans-serif`;
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    ctx.fillStyle = tc; ctx.fillText(band.name, xM, textY);
+    aboveIdx++;
+  });
+
+  // Model name labels rotated on left side (upper half / lower half)
+  const lblFont = `bold 9px DM Sans,sans-serif`;
+  ctx.save();
+  ctx.translate(14, MT + halfH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.font = lblFont; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillStyle = colA; ctx.globalAlpha = 0.85;
+  ctx.fillText(`▲ ${cfg.labelA}`, 0, 0);
+  ctx.restore();
+
+  ctx.save();
+  ctx.translate(14, centerY + halfH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.font = lblFont; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillStyle = colB; ctx.globalAlpha = 0.85;
+  ctx.fillText(`▼ ${cfg.labelB}`, 0, 0);
+  ctx.restore();
+  ctx.globalAlpha = 1;
+}
+
+// Compare chart tooltip + hover
+(function() {
+  const canvas = document.getElementById("cit-compare-canvas");
+  const tip    = document.getElementById("cit-compare-tooltip");
+  if (!canvas || !tip) return;
+  canvas.addEventListener("mousemove", function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const idx = hitAreasCmp.findIndex(h => mx >= h.xl && mx <= h.xr);
+    if (idx < 0) {
+      if (hoveredCmpIdx !== -1) { hoveredCmpIdx = -1; drawCitCompareChart(); }
+      tip.style.display = "none"; return;
+    }
+    if (hoveredCmpIdx !== idx) { hoveredCmpIdx = idx; drawCitCompareChart(); }
+    const hit = hitAreasCmp[idx], r = hit.rule;
+    const cfg = CIT_CMP_PAIRS[citCmpPair];
+    const section = r.rationale_section || r.scope_section || r.label_name || "";
+    const partColor = PART_COLORS[r.part] || "#999";
+    tip.innerHTML = `
+      <div style="margin-bottom:0.35rem;display:flex;align-items:center;gap:0.4rem;">
+        <span style="width:8px;height:8px;background:${partColor};border-radius:2px;display:inline-block;flex-shrink:0;"></span>
+        <span style="color:${partColor};font-weight:600;font-size:0.7rem;">${r.part}</span>
+        ${section ? `<span style="color:rgba(148,163,184,0.9);font-size:0.68rem;">· ${section}</span>` : ""}
+      </div>
+      <div style="margin-bottom:0.45rem;line-height:1.5;font-size:0.72rem;">${r.text.length > 180 ? r.text.slice(0,180)+"…" : r.text}</div>
+      <div style="font-size:0.7rem;border-top:1px solid rgba(255,255,255,0.12);padding-top:0.3rem;display:flex;gap:1rem;">
+        <span><span style="color:${CIT_CMP_MODEL_COLORS[cfg.a]};font-weight:600;">${cfg.labelA}</span> <strong>${hit.pctA.toFixed(2)}%</strong></span>
+        <span><span style="color:${CIT_CMP_MODEL_COLORS[cfg.b]};font-weight:600;">${cfg.labelB}</span> <strong>${hit.pctB.toFixed(2)}%</strong></span>
+      </div>`;
+    const tipW = 300, cW = canvas.getBoundingClientRect().width;
+    let tx = mx + 14, ty = e.clientY - canvas.getBoundingClientRect().top - 65;
+    if (tx + tipW > cW) tx = mx - tipW - 14;
+    if (ty < 4) ty = 4;
+    tip.style.left = tx + "px"; tip.style.top = ty + "px"; tip.style.display = "block";
+  });
+  canvas.addEventListener("mouseleave", () => {
+    hoveredCmpIdx = -1; drawCitCompareChart(); tip.style.display = "none";
+  });
+})();
 
 // Darken a hex color if its relative luminance is too high for readability on white
 function readableColor(hex) {
@@ -1661,7 +1986,7 @@ function drawCitChart() {
 
   // ── 8. SECOND PASS: Rationale band labels (rotated 90°, drawn on top of bars) ─
   // Text reads bottom-to-top. A white pill background ensures legibility.
-  const ratLabelY = baseY - chartH * 0.28;  // ~28% up from baseline
+  const ratLabelY = MT + 62;  // just below label-name pills at MT+40
   CITATION_DATA.rationale_bands.forEach((band) => {
     const x0 = ML + band.start_x * barSpacing;
     const x1 = ML + (band.end_x + 1) * barSpacing;
@@ -1822,8 +2147,8 @@ function drawCitChart() {
   });
 })();
 
-window.addEventListener("load", drawCitChart);
-window.addEventListener("resize", () => { hoveredBarIdx = -1; drawCitChart(); });
+window.addEventListener("load", () => { drawCitChart(); drawCitCompareChart(); });
+window.addEventListener("resize", () => { hoveredBarIdx = -1; drawCitChart(); hoveredCmpIdx = -1; drawCitCompareChart(); });
 
 // ── F1 Line Chart ─────────────────────────────────────────────────────────────
 const F1_DATA = [
@@ -1857,7 +2182,7 @@ function drawF1Chart() {
 
   const PAD_L = 112, PAD_R = 68, PAD_T = 60, PAD_B = 22;
   const chartW = W - PAD_L - PAD_R;
-  const F1_MIN = 0.15, F1_MAX = 0.80;
+  const F1_MIN = SHARED_F1_MIN, F1_MAX = SHARED_F1_MAX;
   const xv = v => PAD_L + (v - F1_MIN) / (F1_MAX - F1_MIN) * chartW;
 
   const sorted = [...F1_DATA].sort((a, b) => (b.vals[3] - a.vals[3]) || (b.vals[0] - a.vals[0]));
@@ -1926,7 +2251,7 @@ function drawF1Chart() {
   }
 
   // F1 scale ticks at top
-  [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8].forEach(v => {
+  for (let v = Math.ceil(F1_MIN * 10) / 10; v <= F1_MAX + 1e-9; v = Math.round((v + 0.1) * 10) / 10) {
     const x = xv(v);
     ctx.save();
     ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1;
@@ -1935,7 +2260,7 @@ function drawF1Chart() {
     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
     ctx.fillText(v.toFixed(1), x, PAD_T - 10);
     ctx.restore();
-  });
+  }
 
   // Level legend at top-left above tracks
   const LEVEL_LABELS = ['Labels', 'Labels+Rationale', 'Labels+Details', 'Full Policy'];
@@ -2333,24 +2658,24 @@ let _egFlagHoverIdx = null;
       const W = canvas.offsetWidth, H = canvas.offsetHeight || 460;
       const PAD_L = 112, PAD_R = 68, PAD_T = 60, PAD_B = 22;
       const chartW = W - PAD_L - PAD_R;
-      const F1_MIN = 0.15, F1_MAX = 0.80;
+      const F1_MIN = SHARED_F1_MIN, F1_MAX = SHARED_F1_MAX;
       const xv = v => PAD_L + (v - F1_MIN) / (F1_MAX - F1_MIN) * chartW;
       const sorted = [...F1_DATA].sort((a, b) => (b.vals[3] - a.vals[3]) || (b.vals[0] - a.vals[0]));
       const rowCount = sorted.length;
       const rowH = (H - PAD_T - PAD_B) / rowCount;
       const ry = i => PAD_T + (i + 0.5) * rowH;
 
-      let found = null, minDist = 14;
+      let found = null, minDist = 16;
       sorted.forEach((m, i) => {
         m.vals.forEach((v, li) => {
           const dx = mx - xv(v), dy = my - ry(i);
           const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < minDist) { minDist = d; found = { m, v, li }; }
+          if (d < minDist) { minDist = d; found = { m, v, li, label: LEVEL_FULL_LABELS[li] }; }
         });
       });
 
       if (found) {
-        showTip(e, `${tipIcon(found.m.name)}<strong>${found.m.name}</strong><br>${LEVEL_FULL_LABELS[found.li]}<br>F₁ = ${found.v.toFixed(2)}`);
+        showTip(e, `${tipIcon(found.m.name)}<strong>${found.m.name}</strong><br>${found.label}<br>F₁ = ${found.v.toFixed(2)}`);
       } else {
         hideTip();
       }
@@ -2423,7 +2748,7 @@ let _egFlagHoverIdx = null;
       const W = canvas.offsetWidth, H = canvas.offsetHeight || 420;
       const PAD_L = 112, PAD_R = 68, PAD_T = 60, PAD_B = 22;
       const chartW = W - PAD_L - PAD_R;
-      const F1_MIN = 0.04, F1_MAX = 0.65;
+      const F1_MIN = SHARED_F1_MIN, F1_MAX = SHARED_F1_MAX;
       const xv = v => PAD_L + (v - F1_MIN) / (F1_MAX - F1_MIN) * chartW;
       const sorted = [...EG_F1_DATA].sort((a, b) => {
         const aMax = Math.max(...a.vals.filter(v=>v!==null));
@@ -2434,18 +2759,26 @@ let _egFlagHoverIdx = null;
       const rowH = (H - PAD_T - PAD_B) / rowCount;
       const ry = i => PAD_T + (i + 0.5) * rowH;
 
-      let found = null, minDist = 14;
+      let found = null, minDist = 16;
       sorted.forEach((m, i) => {
+        // Example-driven markers
         m.vals.forEach((v, li) => {
           if (v === null) return;
           const dx = mx - xv(v), dy = my - ry(i);
           const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < minDist) { minDist = d; found = { m, v, li }; }
+          if (d < minDist) { minDist = d; found = { m, v, label: EG_LEVEL_LABELS[li] }; }
         });
+        // Star: instruction-driven reference
+        const instrVal = F1_INSTR_LRD[m.name];
+        if (instrVal != null) {
+          const dx = mx - xv(instrVal), dy = my - ry(i);
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < minDist) { minDist = d; found = { m, v: instrVal, label: 'Instruction-driven' }; }
+        }
       });
 
       if (found) {
-        showTip(e, `${tipIcon(found.m.name)}<strong>${found.m.name}</strong><br>${EG_LEVEL_LABELS[found.li]}<br>F₁ = ${found.v.toFixed(2)}`);
+        showTip(e, `${tipIcon(found.m.name)}<strong>${found.m.name}</strong><br>${found.label}<br>F₁ = ${found.v.toFixed(2)}`);
       } else {
         hideTip();
       }
@@ -2471,6 +2804,16 @@ const EG_F1_DATA = [
 ];
 const EG_F1_LEVELS = ["Random", "Prototypical", "Contextual"];
 
+// Instruction-driven Labels+Rationale+Details value per model (vals[3])
+const F1_INSTR_LRD = Object.fromEntries(F1_DATA.map(d => [d.name, d.vals[3]]));
+
+// Shared axis range: min from example-driven, max fixed at 0.75
+const SHARED_F1_MIN = (() => {
+  const min = Math.min(...EG_F1_DATA.flatMap(d => d.vals.filter(v => v !== null)));
+  return Math.floor((min - 0.03) * 20) / 20;
+})();
+const SHARED_F1_MAX = 0.75;
+
 function drawEgF1Chart() {
   const canvas = document.getElementById('egf1-canvas');
   if (!canvas) return;
@@ -2485,7 +2828,7 @@ function drawEgF1Chart() {
 
   const PAD_L = 112, PAD_R = 68, PAD_T = 60, PAD_B = 22;
   const chartW = W - PAD_L - PAD_R;
-  const F1_MIN = 0.04, F1_MAX = 0.65;
+  const F1_MIN = SHARED_F1_MIN, F1_MAX = SHARED_F1_MAX;
   const xv = v => PAD_L + (v - F1_MIN) / (F1_MAX - F1_MIN) * chartW;
 
   const sorted = [...EG_F1_DATA].sort((a, b) => {
@@ -2547,7 +2890,22 @@ function drawEgF1Chart() {
     ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
   }
 
-  [0.1, 0.2, 0.3, 0.4, 0.5, 0.6].forEach(v => {
+  function drawStar(x, y, r, color) {
+    ctx.save();
+    ctx.fillStyle = color; ctx.strokeStyle = 'white'; ctx.lineWidth = 1.2; ctx.globalAlpha = 1;
+    ctx.beginPath();
+    for (let k = 0; k < 5; k++) {
+      const oa = (k * 2 * Math.PI / 5) - Math.PI / 2;
+      const ia = oa + Math.PI / 5;
+      if (k === 0) ctx.moveTo(x + r * Math.cos(oa), y + r * Math.sin(oa));
+      else ctx.lineTo(x + r * Math.cos(oa), y + r * Math.sin(oa));
+      ctx.lineTo(x + r * 0.42 * Math.cos(ia), y + r * 0.42 * Math.sin(ia));
+    }
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.restore();
+  }
+
+  for (let v = Math.ceil(F1_MIN * 10) / 10; v <= F1_MAX + 1e-9; v = Math.round((v + 0.1) * 10) / 10) {
     const x = xv(v);
     ctx.save();
     ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1;
@@ -2556,7 +2914,7 @@ function drawEgF1Chart() {
     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
     ctx.fillText(v.toFixed(1), x, PAD_T - 10);
     ctx.restore();
-  });
+  }
 
   const LEG_LABELS = ['Random', 'Prototypical', 'Contextual'];
   const LEG_COLOR = '#475569';
@@ -2568,6 +2926,10 @@ function drawEgF1Chart() {
     ctx.fillText(lbl, legX + 14, PAD_T - 44);
     legX += ctx.measureText(lbl).width + 28;
   });
+  // Star legend entry
+  drawStar(legX + 6, PAD_T - 44, 6, LEG_COLOR);
+  ctx.fillStyle = '#475569'; ctx.textAlign = 'left'; ctx.font = '11px monospace'; ctx.textBaseline = 'middle';
+  ctx.fillText('Instruction-driven', legX + 16, PAD_T - 44);
 
   sorted.forEach((m, i) => {
     const y = ry(i);
@@ -2597,6 +2959,8 @@ function drawEgF1Chart() {
     }
 
     m.vals.forEach((v, li) => { if (v !== null) drawMarker(ctx, li, xv(v), y, m.color); });
+    const instrVal = F1_INSTR_LRD[m.name];
+    if (instrVal != null) drawStar(xv(instrVal), y, 7, m.color);
 
     const egF1IconSz = 13;
     const egF1Icon = getModelIcon(m.name);
@@ -2991,7 +3355,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
 </section>
 
 <!-- EFFICIENCY & COST -->
-<section class="section" id="efficiency">
+<section class="section section-sep" id="efficiency">
   <div class="container">
     <div class="section-label">Efficiency &amp; Cost</div>
     <h2>Practical Considerations for Deployment</h2>
@@ -3068,6 +3432,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
     </div>
 
     <!-- throughput callouts -->
+    <!--
     <div class="timing-throughput reveal">
       <div class="timing-throughput-item">
         <span class="timing-throughput-val">~44</span>
@@ -3086,8 +3451,35 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
         <span class="timing-throughput-lbl">open-weight model refusals (any setting)</span>
       </div>
     </div>
+    -->
+    <!-- Safety model throughput callout -->
+    <div style="margin-top:1.2rem; padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:#f8fafc; display:flex; flex-wrap:wrap; gap:1.2rem; align-items:flex-start;">
+      <div style="flex-shrink:0;">
+        <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:0.6rem;">AI Safety Model Throughput</div>
+        <div style="display:flex; gap:1.8rem; flex-wrap:wrap;">
+          <div>
+            <div style="display:flex; align-items:baseline; gap:0.35rem;">
+              <span style="font-family:var(--serif); font-size:1.6rem; color:var(--text); line-height:1;">470</span>
+              <span style="font-size:0.72rem; color:var(--muted);">posts / min</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text); margin-top:0.15rem; display:flex; align-items:center; gap:0.3rem;"><img src="icons/meta-color.svg" style="width:1em;height:1em;vertical-align:-0.1em;">llama-guard-12B</div>
+          </div>
+          <div>
+            <div style="display:flex; align-items:baseline; gap:0.35rem;">
+              <span style="font-family:var(--serif); font-size:1.6rem; color:var(--text); line-height:1;">115</span>
+              <span style="font-size:0.72rem; color:var(--muted);">posts / min</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text); margin-top:0.15rem; display:flex; align-items:center; gap:0.3rem;"><img src="icons/shieldstral.svg" style="width:1em;height:1em;vertical-align:-0.1em;">shieldstral-3B <span style="color:var(--muted);">*</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1; min-width:220px; font-size:0.78rem; color:var(--muted); line-height:1.6; border-left:1px solid var(--slate-mid); padding-left:1.2rem;">
+        <strong style="color:var(--text);">* Shieldstral inference note:</strong> unlike standard single-pass models, shieldstral requires one independent inference call <em>per policy label per post</em>, as the model is designed to answer only yes/no questions. The final prediction is obtained by aggregating logit scores across all per-label inference calls.
+      </div>
+    </div>
+
     <p style="font-size:0.78rem; color:var(--muted); margin-top:0.8rem; line-height:1.6;">
-      The contextual example-driven setting requires multiple inference calls per post (context windows max at 256K tokens) and cannot use prefix caching. Random and prototypical settings use a fixed example prefix — enabling caching and lower amortized cost — but still trail instruction-driven by 3–17×. † gemini uses Prototypical (best-performing strategy); all other models use Contextual.
+      The contextual example-driven setting achieves lower throughput partly because it cannot benefit from prefix caching, unlike the random and prototypical settings, which use a fixed example set. † Gemini uses Prototypical (best-performing strategy); all other models use Contextual.
     </p>
 
     <!-- API COST -->
@@ -3821,28 +4213,15 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
   let currentSubset = 'random';
   let currentMetric = 'f1';
 
-  function metricColor(v) {
-    if (v == null) return '#94a3b8';
-    if (v >= 0.55) return '#22c55e';
-    if (v >= 0.45) return '#06b6d4';
-    if (v >= 0.35) return '#eab308';
-    return '#f97316';
-  }
-
-  function flagColor(v) {
-    if (v == null) return '#94a3b8';
-    if (v <= 0.02) return '#22c55e';
-    if (v <= 0.05) return '#06b6d4';
-    if (v <= 0.10) return '#eab308';
-    return '#ef4444';
-  }
+  function metricColor(v) { return '#0ea5c9'; }
+  function flagColor(v)  { return '#0ea5c9'; }
 
   function flagCell(v) {
     if (v == null) return `<td class="lb-f1-cell"><span class="lb-na">—</span></td>`;
     const pct = v * 100;
     const col = flagColor(v);
     return `<td class="lb-f1-cell"><div class="lb-f1-inner">` +
-      `<span class="lb-f1-num" style="color:${col}">${pct.toFixed(1)}%</span>` +
+      `<span class="lb-f1-num">${pct.toFixed(1)}%</span>` +
       `<div class="lb-bar-outer"><div class="lb-bar-inner" style="width:${Math.min(100, pct * 5)}%;background:${col}"></div></div>` +
       `</div></td>`;
   }
@@ -3855,7 +4234,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
     if (v == null) return `<td class="lb-f1-cell"><span class="lb-na">—</span></td>`;
     const col = metricColor(v);
     return `<td class="lb-f1-cell"><div class="lb-f1-inner">` +
-      `<span class="lb-f1-num" style="color:${col}">${v.toFixed(2)}</span>` +
+      `<span class="lb-f1-num">${v.toFixed(2)}</span>` +
       `<div class="lb-bar-outer"><div class="lb-bar-inner" style="width:${Math.round(v * 100)}%;background:${col}"></div></div>` +
       `</div></td>`;
   }
