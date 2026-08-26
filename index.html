@@ -922,7 +922,8 @@
     <p class="hero-tagline">A new benchmark of 4,000 manually annotated multimodal posts grounded in the Bluesky platform</p>
     <div class="hero-actions">
       <a href="#" class="btn btn-primary">&#128196; Read Paper</a>
-      <a href="https://huggingface.co/datasets/modprompts/ModerationPrompts" target="_blank" class="btn btn-outline"><img src="icons/huggingface-color.svg" class="model-icon" alt="" style="width:1.1em;height:1.1em;vertical-align:-0.15em;margin-right:0.35em;"> View Dataset</a>
+      <a href="https://huggingface.co/datasets/ayanmaj/moderation-bench" target="_blank" class="btn btn-outline"><img src="icons/huggingface-color.svg" class="model-icon" alt="" style="width:1.1em;height:1.1em;vertical-align:-0.15em;margin-right:0.35em;"> Get Dataset</a>
+      <a href="https://github.com/ayanmaj92/moderation-bench" target="_blank" class="btn btn-outline"><svg style="width:1.1em;height:1.1em;vertical-align:-0.15em;margin-right:0.35em;fill:currentColor;" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> View Code</a>
     </div>
     <div class="content-warning"><i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24;"></i> Content Warning: This paper contains examples of potentially harmful or offensive content.</div>
     <div class="hero-stats">
@@ -1427,9 +1428,9 @@
 
     <!-- Citation Distribution Chart -->
     <div style="margin-top:2.5rem;">
-      <h3 style="font-family:var(--serif); font-weight:400; font-size:1.4rem; margin-bottom:0.3rem;">Which Policy Rules Do Models Actually Cite?</h3>
+      <h3 style="font-family:var(--serif); font-weight:400; font-size:1.4rem; margin-bottom:0.3rem;">Which Policy Rules Do Models Cite in Instruction-Driven Paradigm?</h3>
       <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:0.8rem; max-width:680px;">
-        Each bar represents one of 177 policy rules. Height shows what fraction of that model's total citations went to that rule. Color encodes the policy component type. Hover any bar to see the rule text and citation rate.
+        Each bar represents one of 177 atomic policy rules. Height shows what fraction of that model's total citations went to that rule. Color encodes the policy component type. Hover any bar to see the rule text and citation rate.
       </p>
 
       <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:0.4rem;">
@@ -1470,7 +1471,7 @@
       </div>
 
       <!-- Compare Model Judgments -->
-      <h3 style="margin-top:2.5rem; margin-bottom:0.4rem; font-family:var(--serif); font-weight:400; font-size:1.4rem;">Compare Model Judgments</h3>
+      <h3 style="margin-top:2.5rem; margin-bottom:0.4rem; font-family:var(--serif); font-weight:400; font-size:1.4rem;">Compare Instruction-Driven Model Judgments</h3>
       <p style="color:var(--text-light); font-size:0.85rem; margin-bottom:0.8rem; max-width:680px;">
         Citation distributions for both models in a pair, filtered to posts where their decisions agree or disagree. Each rule shows a mirrored bar chart — one model above the axis, the other below — so differences in rule reliance are immediately visible.
       </p>
@@ -3412,7 +3413,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
   <div class="container">
     <div class="section-label">Efficiency &amp; Cost</div>
     <h2>Practical Considerations for Deployment</h2>
-    <p class="section-intro">Instruction-driven moderation handles tens to hundreds of posts per minute — example-driven contextual prompting drops throughput to under 6 posts/min with no F₁ gain. Open-weight models offer frontier-level performance at zero API cost.</p>
+    <p class="section-intro">Instruction-driven moderation handles tens to hundreds of posts per minute, whereas example-driven prompting drops throughput to under 6 posts/min with no F₁ gain. Open-weight models offer frontier-level performance at no added API cost (when self-hosting).</p>
 
     <!-- TIMING HEATMAP (mode tabs) -->
     <div style="margin-top:1.5rem; font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.5rem;">
@@ -3556,7 +3557,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
           <div class="cost-row"><span class="cost-label">+ Details</span><span class="cost-val amber">$48.48</span></div>
           <div class="cost-row"><span class="cost-label">Full policy (What, Why &amp; How)</span><span class="cost-val amber">$40.68</span></div>
         </div>
-        <p style="font-size:0.78rem; color:var(--muted); margin-top:0.8rem;">Open-weight models (gemma4, qwen3.5): <strong style="color:var(--text)">$0 API cost</strong>. Self-hosted on institution compute.</p>
+        <p style="font-size:0.78rem; color:var(--muted); margin-top:0.8rem;">Open-weight models are self-hosted and, hence, have <strong style="color:var(--text)">$0 API cost</strong>. Estimated compute cost on AWS P5e systems (at $5.97 per GPU-hour) for open-weight models in the instruction driven paradigm can be around $2-$20 for the full benchmark, with gemma4: $7.96 and qwen3.5: $13.91.</p>
       </div>
 
       <div class="cost-card reveal">
@@ -3589,7 +3590,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
 }</pre>
     </div>
     <p style="color:rgba(255,255,255,0.3); font-size:0.82rem; margin-top:1.5rem;">
-      Dataset available at <a href="https://huggingface.co/datasets/modprompts/ModerationPrompts" target="_blank" style="color:var(--teal);"><img src="icons/huggingface-color.svg" style="width:1em;height:1em;vertical-align:-0.12em;margin-right:0.25em;" alt="">huggingface.co/datasets/modprompts/ModerationPrompts</a>
+      Dataset available at <a href="https://huggingface.co/datasets/ayanmaj/moderation-bench" target="_blank" style="color:var(--teal);"><img src="icons/huggingface-color.svg" style="width:1em;height:1em;vertical-align:-0.12em;margin-right:0.25em;" alt="">huggingface.co/datasets/ayanmaj/moderation-bench</a>
       (gated, non-commercial use only due to sensitive content).
     </p>
   </div>
@@ -3597,7 +3598,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
 
 <footer>
   <p>ModerationBench &mdash; ACL 2025 Submission &mdash; Anonymous Authors &mdash;
-  Dataset: <a href="https://huggingface.co/datasets/modprompts/ModerationPrompts" target="_blank"><img src="icons/huggingface-color.svg" style="width:1em;height:1em;vertical-align:-0.12em;margin-right:0.2em;" alt="">HuggingFace</a>
+  Dataset: <a href="https://huggingface.co/datasets/ayanmaj/moderation-bench" target="_blank"><img src="icons/huggingface-color.svg" style="width:1em;height:1em;vertical-align:-0.12em;margin-right:0.2em;" alt="">HuggingFace</a>
   </p>
 </footer>
 
