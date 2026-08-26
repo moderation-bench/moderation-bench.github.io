@@ -1363,7 +1363,7 @@
     <div class="chart-section reveal">
       <div class="ef-chart-title">Flagging Rate on Random Posts (%) · Example-Driven</div>
       <div class="ef-canvas-wrap">
-        <canvas id="egflag-canvas" style="height:320px;"></canvas>
+        <canvas id="egflag-canvas" style="height:420px;"></canvas>
       </div>
     </div>
   </div>
@@ -2384,6 +2384,8 @@ const FLAGGING_DATA = [
   { name:"magistral", vals:[17.91, 16.19, 7.59, 9.11] },
   { name:"gemma3",    vals:[21.66, 22.67, 15.38, 16.60] },
 ];
+// Instruction-driven L+R+D flagging rate per model (for delta overlay on EG flag chart)
+const EG_INSTR_FLAG_LRD = Object.fromEntries(FLAGGING_DATA.map(d => [d.name, d.vals[3]]));
 const FLAG_COLORS = ["#3b82f6","#f59e0b","#16a34a","#ea580c"];
 const FLAG_LEVELS = ["Labels","L+Rationale","L+Details","L+R+D"];
 const HUMAN_RATE = 2.7;
@@ -2725,7 +2727,9 @@ let _egFlagHoverIdx = null;
       if (hit) {
         canvas.style.cursor = 'crosshair';
         if (_egFlagHoverIdx !== hit.idx) { _egFlagHoverIdx = hit.idx; drawEgFlagChart(); }
-        showTip(e, `${tipIcon(hit.m.name)}<strong>${hit.m.name}</strong><br>${EG_FLAG_LEVELS[hit.li]}<br>Flag rate = ${hit.v.toFixed(1)}%`);
+        const instrRef = EG_INSTR_FLAG_LRD[hit.m.name];
+        const deltaStr = instrRef != null ? `<br>Full Policy (Instr.) = ${instrRef.toFixed(1)}%<br>Δ = ${(hit.v - instrRef) >= 0 ? '+' : ''}${(hit.v - instrRef).toFixed(1)} pp` : '';
+        showTip(e, `${tipIcon(hit.m.name)}<strong>${hit.m.name}</strong><br>${EG_FLAG_LEVELS[hit.li]}<br>Flag rate = ${hit.v.toFixed(1)}%${deltaStr}`);
       } else {
         canvas.style.cursor = '';
         if (_egFlagHoverIdx !== null) { _egFlagHoverIdx = null; drawEgFlagChart(); }
@@ -2791,16 +2795,17 @@ let _egFlagHoverIdx = null;
 
 // ── Example-Driven F1 Dot-Track Chart ─────────────────────────────────────────
 const EG_F1_DATA = [
-  { name:"gemma4",     color:"#ea580c", vals:[0.42, 0.47, 0.47] },
-  { name:"qwen3.5",    color:"#16a34a", vals:[0.19, 0.19, 0.35] },
-  { name:"qwen3vl-th", color:"#dc2626", vals:[0.15, 0.20, 0.26] },
-  { name:"magistral",  color:"#78350f", vals:[0.20, 0.26, 0.26] },
-  { name:"gemma3",     color:"#fb7185", vals:[0.13, 0.15, 0.25] },
-  { name:"mistral3",   color:"#ca8a04", vals:[0.26, 0.27, 0.37] },
-  { name:"qwen3vl",    color:"#38bdf8", vals:[0.29, 0.28, 0.34] },
-  { name:"llama4",     color:"#3b82f6", vals:[0.09, 0.16, 0.40] },
-  { name:"gemini3.5",  color:"#7c3aed", vals:[0.55, 0.59, 0.47] },
-  { name:"gpt5.6",     color:"#0f172a", vals:[null, 0.42, null] },
+  { name:"gemma4",     color:"#ea580c", vals:[0.44, 0.48, 0.49] },
+  { name:"qwen3.5",    color:"#16a34a", vals:[0.19, 0.20, 0.37] },
+  { name:"qwen3vl-th", color:"#dc2626", vals:[0.16, 0.20, 0.27] },
+  { name:"magistral",  color:"#78350f", vals:[0.21, 0.25, 0.23] },
+  { name:"gemma3",     color:"#fb7185", vals:[0.15, 0.17, 0.26] },
+  { name:"mistral3",   color:"#ca8a04", vals:[0.27, 0.28, 0.38] },
+  { name:"qwen3vl",    color:"#38bdf8", vals:[0.31, 0.30, 0.36] },
+  { name:"llama4",     color:"#3b82f6", vals:[0.14, 0.18, 0.41] },
+  { name:"gemini3.5",  color:"#7c3aed", vals:[0.53, 0.59, 0.46] },
+  { name:"intern",     color:"#ec4899", vals:[0.18, 0.19, null] },
+  { name:"llava",      color:"#6b7280", vals:[null, 0.10, null] },
 ];
 const EG_F1_LEVELS = ["Random", "Prototypical", "Contextual"];
 
@@ -2998,38 +3003,50 @@ function drawEgF1Chart() {
 
 // ── Example-Driven Flagging Rate Bar Chart ───────────────────────────────────
 const EG_FLAG_DATA = [
-  { name:"gemma4",     vals:[8.5, 7.0, 6.5] },
-  { name:"qwen3.5",    vals:[24.5, 21.5, 10.0] },
-  { name:"llama-scout", vals:[34.0, 23.0, 8.5] },
-  { name:"gemini3.5",  vals:[4.0, 3.0, 4.0] },
+  { name:"gemini3.5",  vals:[4.05,  3.04,  5.72]  },
+  { name:"gemma4",     vals:[8.3,   7.2,   6.7]   },
+  { name:"qwen3.5",    vals:[24.4,  21.9,  9.9]   },
+  { name:"llama4",     vals:[33.5,  23.1,  8.4]   },
+  { name:"qwen3vl-th", vals:[27.1,  20.8,  13.61] },
+  { name:"intern",     vals:[23.9,  24.2,  null]  },
+  { name:"qwen3vl",    vals:[13.6,  14.0,  10.2]  },
+  { name:"mistral3",   vals:[16.0,  13.6,  7.4]   },
+  { name:"magistral",  vals:[19.5,  14.7,  16.67] },
+  { name:"gemma3",     vals:[32.9,  28.1,  17.4]  },
+  { name:"llava",      vals:[null,  45.5,  null]  },
 ];
 const EG_FLAG_LEVELS = ["Random", "Prototypical", "Contextual"];
-const EG_FLAG_COLORS = { "gemma4":"#ea580c", "qwen3.5":"#16a34a", "llama-scout":"#3b82f6", "gemini3.5":"#7c3aed" };
+const EG_FLAG_COLORS = {
+  "gemini3.5":"#7c3aed", "gemma4":"#ea580c",    "qwen3.5":"#16a34a",
+  "llama4":   "#3b82f6", "qwen3vl-th":"#dc2626","intern":  "#0d9488",
+  "qwen3vl":  "#38bdf8", "mistral3": "#ca8a04", "magistral":"#78350f",
+  "gemma3":   "#fb7185", "llava":    "#059669",
+};
 
 function drawEgFlagChart() {
   const canvas = document.getElementById('egflag-canvas');
   if (!canvas) return;
   const dpr = window.devicePixelRatio || 1;
   const W = canvas.offsetWidth;
-  const H = canvas.offsetHeight || 320;
+  const H = canvas.offsetHeight || 420;
   canvas.width  = Math.round(W * dpr);
   canvas.height = Math.round(H * dpr);
   const ctx = canvas.getContext('2d');
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, W, H);
 
-  const PAD_L = 44, PAD_R = 96, PAD_T = 54, PAD_B = 42;
+  const PAD_L = 44, PAD_R = 100, PAD_T = 72, PAD_B = 42;
   const chartW = W - PAD_L - PAD_R;
   const chartH = H - PAD_T - PAD_B;
-  const EG_Y_MAX = 38;
+  const EG_Y_MAX = 50;
   const yPos  = v => PAD_T + chartH * (1 - v / EG_Y_MAX);
   const yBase = PAD_T + chartH;
 
   const nGroups = 3, nBars = EG_FLAG_DATA.length;
   const groupSlot = chartW / nGroups;
-  const innerW    = groupSlot * 0.74;
-  const bGap      = 4;
-  const bW        = (innerW - bGap * (nBars - 1)) / nBars;
+  const innerW    = groupSlot * 0.82;
+  const bGap      = 2;
+  const bW        = Math.max(4, (innerW - bGap * (nBars - 1)) / nBars);
   const gx0 = li  => PAD_L + li * groupSlot + (groupSlot - innerW) / 2;
   const bx  = (li, mi) => gx0(li) + mi * (bW + bGap);
 
@@ -3043,7 +3060,7 @@ function drawEgFlagChart() {
   ctx.fillStyle = '#10b98118';
   ctx.fillRect(PAD_L - 6, hbT, chartW + 6, hbB - hbT);
 
-  [0, 5, 10, 15, 20, 25, 30, 35].forEach(v => {
+  [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50].forEach(v => {
     const y = yPos(v);
     ctx.save();
     ctx.strokeStyle = v === 0 ? '#cbd5e1' : '#e2e8f0'; ctx.lineWidth = 1;
@@ -3066,6 +3083,18 @@ function drawEgFlagChart() {
   ctx.fillText('Human 2.7%', labelX, humanY);
   ctx.restore();
 
+  // BMS reference line
+  const bmsY = yPos(BMS_RATE);
+  ctx.save();
+  ctx.setLineDash([5, 4]); ctx.strokeStyle = '#1185FE'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(PAD_L - 6, bmsY); ctx.lineTo(PAD_L + chartW, bmsY); ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = '#1185FE'; ctx.font = 'bold 10px monospace';
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ctx.fillText('BMS 0.6%', labelX, bmsY);
+  ctx.restore();
+
   const anyHovered = _egFlagHoverIdx !== null;
   canvas._egFlagBars = [];
   for (let li = 0; li < nGroups; li++) {
@@ -3073,12 +3102,13 @@ function drawEgFlagChart() {
       const idx = li * nBars + mi;
       const m   = EG_FLAG_DATA[mi];
       const v   = m.vals[li];
+      if (v == null) continue;
       const x   = bx(li, mi);
-      const y   = yPos(v);
+      const y   = yPos(Math.min(v, EG_Y_MAX));
       const h   = yBase - y;
       const color   = EG_FLAG_COLORS[m.name] || '#64748b';
       const isHover = _egFlagHoverIdx === idx;
-      const rr = Math.min(5, bW / 2, h);
+      const rr = Math.min(4, bW / 2, Math.max(0, h));
 
       const grad = ctx.createLinearGradient(0, y, 0, yBase);
       grad.addColorStop(0, color);
@@ -3094,6 +3124,22 @@ function drawEgFlagChart() {
       ctx.quadraticCurveTo(x + bW, y, x + bW, y + rr);
       ctx.lineTo(x + bW, yBase); ctx.closePath(); ctx.fill();
       ctx.restore();
+
+      // Delta indicator: dashed tick at instruction-driven L+R+D flagging rate
+      const instrRef = EG_INSTR_FLAG_LRD[m.name];
+      if (instrRef != null) {
+        const instrY = yPos(Math.min(instrRef, EG_Y_MAX));
+        ctx.save();
+        ctx.globalAlpha = anyHovered ? (isHover ? 1 : 0.38) : 0.88;
+        ctx.strokeStyle = instrRef < v ? 'rgba(255,255,255,0.9)' : 'rgba(30,41,59,0.65)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([2, 2]);
+        ctx.beginPath();
+        ctx.moveTo(x + 1, instrY);
+        ctx.lineTo(x + bW - 1, instrY);
+        ctx.stroke();
+        ctx.restore();
+      }
 
       if (isHover) {
         ctx.save();
@@ -3131,10 +3177,14 @@ function drawEgFlagChart() {
     ctx.fillText(EG_FLAG_LEVELS[li], cx, yBase + 10);
   }
 
-  let lx = PAD_L;
-  const ly = PAD_T - 26;
-  const egIconSz = 12;
+  // Multi-row model legend
+  ctx.font = '11px monospace';
+  let lx = PAD_L, ly = PAD_T - 48;
+  const egIconSz = 12, maxLegW = W - PAD_L - PAD_R;
   EG_FLAG_DATA.forEach(m => {
+    const textW = ctx.measureText(m.name).width;
+    const itemW = egIconSz + 5 + textW + 14;
+    if (lx + itemW > PAD_L + maxLegW) { lx = PAD_L; ly += 15; }
     const icon = getModelIcon(m.name);
     if (icon && icon.complete && icon.naturalWidth) {
       try { ctx.drawImage(icon, lx, ly - egIconSz / 2, egIconSz, egIconSz); } catch(e) {}
@@ -3144,11 +3194,24 @@ function drawEgFlagChart() {
       if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(lx, ly - 5, 12, 10, 2); ctx.fill(); }
       else ctx.fillRect(lx, ly - 5, 12, 10);
     }
-    ctx.fillStyle = '#334155'; ctx.font = '11.5px monospace';
-    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#334155'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
     ctx.fillText(m.name, lx + egIconSz + 5, ly);
-    lx += egIconSz + 5 + ctx.measureText(m.name).width + 14;
+    lx += itemW;
   });
+
+  // Delta reference legend entry
+  ly += 15;
+  ctx.save();
+  ctx.fillStyle = '#64748b'; ctx.globalAlpha = 0.3;
+  ctx.fillRect(PAD_L, ly - 5, 20, 10);
+  ctx.globalAlpha = 0.9;
+  ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 1.5;
+  ctx.setLineDash([2, 2]);
+  ctx.beginPath(); ctx.moveTo(PAD_L + 2, ly); ctx.lineTo(PAD_L + 18, ly); ctx.stroke();
+  ctx.restore();
+  ctx.fillStyle = '#64748b'; ctx.font = '10.5px monospace';
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ctx.fillText('— Full Policy baseline (Instr-driven)', PAD_L + 24, ly);
 }
 
 window.addEventListener("load", () => { drawF1Chart(); drawFlagChart(); drawEgF1Chart(); drawEgFlagChart(); });
@@ -4186,11 +4249,31 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
       random:{p:0.09, r:0.42, f1:0.14}, mod:{p:0.93, r:0.53, f1:0.67}, near:{p:0.61, r:0.47, f1:0.53}, safe:{flag:0.1534} },
     { display:'shieldstral',   size:'3B',     icon:'shieldstral',   type:'safety',   paradigm:'instr',   cfg:'',
       random:{p:0.07, r:0.96, f1:0.13}, mod:{p:0.85, r:0.97, f1:0.91}, near:{p:0.51, r:0.96, f1:0.67}, safe:{flag:0.0725} },
-    // Example-driven entries:
-    { display:'gemini3.5',     size:'flash',  icon:'gemini-color',  type:'frontier', paradigm:'example', cfg:'',
-      random:{p:0.53, r:0.67, f1:0.59}, mod:{p:0.89, r:0.97, f1:0.93}, near:{p:0.81, r:0.88, f1:0.84}, safe:{flag:null} },
-    { display:'gemma4',        size:'31B',    icon:'gemma-color',   type:'open',     paradigm:'example', cfg:'',
-      random:{p:0.32, r:0.88, f1:0.47}, mod:{p:0.85, r:0.98, f1:0.91}, near:{p:0.70, r:0.97, f1:0.81}, safe:{flag:null} },
+    // Example-driven (gemini/gpt: Prototypical; open-weight: Contextual where available, else Prototypical):
+    { display:'gemini3.5',    size:'flash',   icon:'gemini-color',  type:'frontier', paradigm:'example', cfg:'',
+      random:{p:0.53, r:0.67, f1:0.59}, mod:{p:0.89, r:0.97, f1:0.93}, near:{p:0.81, r:0.88, f1:0.84}, safe:{flag:0.0000} },
+    { display:'gemma4',       size:'31B',     icon:'gemma-color',   type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.34, r:0.85, f1:0.49}, mod:{p:0.86, r:0.93, f1:0.89}, near:{p:0.70, r:0.97, f1:0.81}, safe:{flag:0.0000} },
+    { display:'llama4-scout', size:'17B-16E', icon:'meta-color',    type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.27, r:0.85, f1:0.41}, mod:{p:0.88, r:0.90, f1:0.89}, near:{p:0.63, r:0.94, f1:0.76}, safe:{flag:0.0290} },
+    { display:'mistral3.2',   size:'24B',     icon:'mistral-color', type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.26, r:0.70, f1:0.38}, mod:{p:0.88, r:0.89, f1:0.89}, near:{p:0.71, r:0.85, f1:0.78}, safe:{flag:0.0104} },
+    { display:'qwen3vl-th',   size:'32B',     icon:'qwen-color',    type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.16, r:0.81, f1:0.27}, mod:{p:0.86, r:0.86, f1:0.86}, near:{p:0.54, r:0.93, f1:0.68}, safe:{flag:0.0104} },
+    { display:'qwen3vl',      size:'32B',     icon:'qwen-color',    type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.23, r:0.85, f1:0.36}, mod:{p:0.86, r:0.94, f1:0.90}, near:{p:0.59, r:0.96, f1:0.74}, safe:{flag:0.0207} },
+    { display:'qwen3.5',      size:'27B',     icon:'qwen-color',    type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.23, r:0.85, f1:0.37}, mod:{p:0.87, r:0.93, f1:0.90}, near:{p:0.57, r:0.95, f1:0.71}, safe:{flag:0.0031} },
+    { display:'gemma3',       size:'27B',     icon:'gemma-color',   type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.15, r:0.96, f1:0.26}, mod:{p:0.85, r:0.95, f1:0.90}, near:{p:0.54, r:0.99, f1:0.70}, safe:{flag:0.0373} },
+    { display:'magistral',    size:'24B',     icon:'mistral-color', type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.13, r:0.90, f1:0.23}, mod:{p:0.86, r:0.92, f1:0.89}, near:{p:0.57, r:0.99, f1:0.72}, safe:{flag:0.0332} },
+    { display:'internvl3.5',  size:'38B',     icon:'internvl',      type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.10, r:0.93, f1:0.19}, mod:{p:0.85, r:0.89, f1:0.87}, near:{p:0.44, r:0.96, f1:0.61}, safe:{flag:0.0093} },
+    { display:'llava-ov',     size:'72B',     icon:'llava-color',   type:'open',     paradigm:'example', cfg:'',
+      random:{p:0.05, r:0.93, f1:0.10}, mod:{p:0.85, r:0.98, f1:0.91}, near:{p:null, r:null, f1:null}, safe:{flag:null} },
+    { display:'gpt5.6',       size:'terra',   icon:'openai',        type:'frontier', paradigm:'example', cfg:'',
+      random:{p:null, r:null, f1:null}, mod:{p:null, r:null, f1:null}, near:{p:0.63, r:0.96, f1:0.76}, safe:{flag:0.0000} },
   ];
   const BMS = { display:'Bluesky Moderation Service', icon:'bluesky', type:'deployed', paradigm:'deployed', cfg:'',
     random:{p:1.00, r:0.12, f1:0.22}, mod:{p:0.83, r:1.00, f1:0.91}, near:{p:0.00, r:0.00, f1:0.00}, safe:{flag:0.00} };
