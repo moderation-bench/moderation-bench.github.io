@@ -1346,7 +1346,7 @@
   <div class="container">
     <div class="section-label">Analysis</div>
     <h2>Analysis of Example-Driven Moderation</h2>
-    <p class="section-intro">We evaluate three example selection strategies — Random, Prototypical, and Contextual — and compare their moderation decisions against both human annotations and the instruction-driven paradigm.</p>
+    <p class="section-intro">Open-weight models perform better with contextual examples, however, most show higher flagging than instruction-driven and lower F1 scores. Frontier API models perform better with prototypical, but show no major improvement over instruction-driven paradigm.</p>
 
     <hr class="subsec-divider">
 
@@ -1384,12 +1384,12 @@
         <div class="con-stat-sub">Instance-level prediction on whether specific posts should be flagged remain stable across policy instruction granularities.</div>
       </div>
       <div class="con-stat-card reveal">
-        <span class="con-stat-num">AC1 ≈ 0.78</span>
-        <div class="con-stat-label">Gwet's AC1 on Moderated</div>
-        <div class="con-stat-sub">High decision agreement between most capable open-weight VLMs on Moderated Posts in instruction-driven: gemma4 &amp; qwen3.5.</div>
+        <span class="con-stat-num">0.78</span>
+        <div class="con-stat-label">High inter-model Gwet's AC1</div>
+        <div class="con-stat-sub">VLMs show high inter-model decision agreements; value shown for gemma4 &amp; qwen3.5 (instruction-driven) on Moderated Posts.</div>
       </div>
       <div class="con-stat-card reveal">
-        <span class="con-stat-num">>=40%</span>
+        <span class="con-stat-num">≥40%</span>
         <div class="con-stat-label">Policy Rules Never Cited</div>
         <div class="con-stat-sub">Instruction-driven VLMs rely on sparse subset of policy rules. gemma4 never cites 50.3%; qwen3.5 never cites 47.5%; 40.1% by neither.</div>
       </div>
