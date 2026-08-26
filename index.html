@@ -2754,11 +2754,7 @@ let _egFlagHoverIdx = null;
       const chartW = W - PAD_L - PAD_R;
       const F1_MIN = SHARED_F1_MIN, F1_MAX = SHARED_F1_MAX;
       const xv = v => PAD_L + (v - F1_MIN) / (F1_MAX - F1_MIN) * chartW;
-      const sorted = [...EG_F1_DATA].sort((a, b) => {
-        const aMax = Math.max(...a.vals.filter(v=>v!==null));
-        const bMax = Math.max(...b.vals.filter(v=>v!==null));
-        return (bMax - aMax) || 0;
-      });
+      const sorted = [...EG_F1_DATA].sort((a, b) => (F1_INSTR_LRD[b.name] ?? -1) - (F1_INSTR_LRD[a.name] ?? -1));
       const rowCount = sorted.length;
       const rowH = (H - PAD_T - PAD_B) / rowCount;
       const ry = i => PAD_T + (i + 0.5) * rowH;
@@ -2834,11 +2830,7 @@ function drawEgF1Chart() {
   const F1_MIN = SHARED_F1_MIN, F1_MAX = SHARED_F1_MAX;
   const xv = v => PAD_L + (v - F1_MIN) / (F1_MAX - F1_MIN) * chartW;
 
-  const sorted = [...EG_F1_DATA].sort((a, b) => {
-    const aMax = Math.max(...a.vals.filter(v=>v!==null));
-    const bMax = Math.max(...b.vals.filter(v=>v!==null));
-    return (bMax - aMax) || 0;
-  });
+  const sorted = [...EG_F1_DATA].sort((a, b) => (F1_INSTR_LRD[b.name] ?? -1) - (F1_INSTR_LRD[a.name] ?? -1));
   const rowCount = sorted.length;
   const rowH = (H - PAD_T - PAD_B) / rowCount;
   const trackH = Math.min(rowH * 0.62, 20);
@@ -3190,7 +3182,7 @@ function drawEgFlagChart() {
       if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(lx, ly - 5, 12, 10, 2); ctx.fill(); }
       else ctx.fillRect(lx, ly - 5, 12, 10);
     }
-    ctx.fillStyle = '#334155'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = EG_FLAG_COLORS[m.name] || '#334155'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
     ctx.fillText(m.name, lx + egIconSz + 5, ly);
     lx += itemW;
   });
