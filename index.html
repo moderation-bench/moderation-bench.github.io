@@ -683,7 +683,7 @@
   .cost-val.amber { color: #d97706; }
   .cost-val.red { color: var(--rose); }
   /* === TIMING HEATMAP === */
-  .timing-heatmap { margin-top: 0.5rem; background: white; border: 1px solid var(--slate-mid); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .timing-heatmap { margin-top: 0.5rem; background: white; border: 1px solid var(--slate-mid); border-radius: var(--radius); overflow-x: auto; box-shadow: var(--shadow); }
   .timing-heatmap-header { display: grid; grid-template-columns: 120px 1fr 1fr; background: var(--slate-light); border-bottom: 1px solid var(--slate-mid); }
   .timing-heatmap-header > div { padding: 0.6rem 1rem; font-family: var(--mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
   .timing-heatmap-header .col-instr { border-left: 1px solid var(--slate-mid); color: #15803d; }
@@ -719,6 +719,7 @@
     .nav-links { display: none; }
     .hero { padding: 5rem 1.5rem 3.5rem; }
     .hero-stats { gap: 1.5rem; }
+    .stat-num { font-size: 1.6rem; }
     .section { padding: 3.5rem 1.5rem; }
     .findings-grid { grid-template-columns: 1fr; }
     .bar-row { grid-template-columns: 100px 1fr 48px; }
@@ -726,6 +727,9 @@
     .models-grid { grid-template-columns: 1fr; }
     .tab-group { width: 100%; }
     .tab-btn { flex: 1; }
+    .timing-mode-tabs { flex-wrap: wrap; }
+    .lb-subset-tabs { gap: 0.4rem; }
+    .lb-stab { font-size: 0.74rem; padding: 0.4rem 0.7rem; }
   }
 
   /* Timing heatmap — shared */
@@ -733,10 +737,10 @@
   .thm-cell { padding:0.55rem 0.7rem; border-left:1px solid rgba(0,0,0,0.08); font-family:var(--mono); font-size:0.82rem; font-weight:700; color:#1a3a1a; text-align:center; }
   .thm-cell small { font-size:0.62rem; font-weight:400; display:block; opacity:0.65; }
   /* 5-col (instruction: model + 4 policy levels) */
-  .thm-5 .thm-header, .thm-5 .thm-row { display:grid; grid-template-columns: 140px repeat(4,1fr); }
+  .thm-5 .thm-header, .thm-5 .thm-row { display:grid; grid-template-columns: 140px repeat(4,1fr); min-width: 520px; }
   /* 4-col (example/cross: model + 3 settings) */
-  .thm-4 .thm-header, .thm-4 .thm-row { display:grid; grid-template-columns: 140px repeat(3,1fr); }
-  .thm-3 .thm-header, .thm-3 .thm-row { display:grid; grid-template-columns: 140px repeat(2,1fr); }
+  .thm-4 .thm-header, .thm-4 .thm-row { display:grid; grid-template-columns: 140px repeat(3,1fr); min-width: 400px; }
+  .thm-3 .thm-header, .thm-3 .thm-row { display:grid; grid-template-columns: 140px repeat(2,1fr); min-width: 320px; }
   .thm-header { background:var(--slate-light); border-bottom:1px solid var(--slate-mid); }
   .thm-header > div { padding:0.55rem 0.7rem; font-family:var(--mono); font-size:0.66rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--muted); border-left:1px solid var(--slate-mid); }
   .thm-header > div:first-child { border-left:none; }
@@ -749,8 +753,8 @@
   .timing-mode-panel.active { display:block; }
 
   /* F1 + Flagging canvas charts */
-  .ef-canvas-wrap { position:relative; width:100%; }
-  .ef-canvas-wrap canvas { width:100%; display:block; }
+  .ef-canvas-wrap { position:relative; width:100%; overflow-x:auto; }
+  .ef-canvas-wrap canvas { width:100%; min-width:500px; display:block; }
   .ef-chart-title { font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--muted); margin-bottom:0.5rem; margin-top:1.8rem; }
   /* Sankey diagram */
   .sankey-pair-tabs { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.6rem; }
@@ -914,7 +918,7 @@
     <div class="bench-tag">ModerationBench</div>
     <h1>Can Foundation Models<br><em>Moderate Online Content?</em></h1>
     <p class="hero-subtitle">Evaluating Instruction- vs. Example-Driven Policy Operationalization</p>
-    <p class="hero-tagline">A new benchmark of 4,000 manually annotated multimodal posts grounded in the Bluesky platform</p>
+    <p class="hero-tagline">A new benchmark of ≈4,000 manually annotated multimodal posts grounded in the Bluesky platform</p>
     <div class="hero-actions">
       <a href="#" class="btn btn-primary">&#128196; Read Paper</a>
       <a href="https://huggingface.co/datasets/ayanmaj/ModerationBench-4K" target="_blank" class="btn btn-outline"><img src="icons/huggingface-color.svg" class="model-icon" alt="" style="width:1.1em;height:1.1em;vertical-align:-0.15em;margin-right:0.35em;"> Get Dataset</a>
@@ -923,7 +927,7 @@
     <div class="content-warning"><i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24;"></i> Content Warning: This paper contains examples of potentially harmful or offensive content.</div>
     <div class="hero-stats">
       <div class="stat">
-        <span class="stat-num"><em>4,000</em></span>
+        <span class="stat-num"><em>≈4,000</em></span>
         <span class="stat-label">Annotated Posts</span>
       </div>
       <div class="stat">
@@ -935,8 +939,8 @@
         <span class="stat-label">Policy Guidance Paradigms</span>
       </div>
       <div class="stat">
-        <span class="stat-num"><em>3×</em></span>
-        <span class="stat-label">VLM F₁ vs. deployment</span>
+        <span class="stat-num"><em>7</em></span>
+        <span class="stat-label">Prompting Strategies</span>
       </div>
     </div>
   </div>
@@ -955,7 +959,7 @@
     </div>
 
     <p class="overview-intro reveal">
-      We introduce <strong>ModerationBench</strong>, a benchmark of 4,000 multimodal posts collected from the Bluesky social media platform across four complementary evaluation subsets. With the inclusion of real-world platform moderation labels assigned by <strong><a href="https://bsky.app/profile/did:plc:ar7c4by46qjdydhdevvrndac" target="_blank" rel="noopener">BMS (Bluesky Moderation Service)</a></strong>, we provide <strong>the first benchmark</strong> to pair production moderation decisions with independent human annotations grounded in the platform's policy. We evaluate 14 Vision-Language Models spanning open-weight, frontier (API-based), and specialized safety-tuned models under two prompting paradigms of policy guidance.
+      We introduce <strong>ModerationBench</strong>, a benchmark of ≈4,000 multimodal posts collected from the Bluesky social media platform across four complementary evaluation subsets. With the inclusion of real-world platform moderation labels assigned by <strong><a href="https://bsky.app/profile/did:plc:ar7c4by46qjdydhdevvrndac" target="_blank" rel="noopener">BMS (Bluesky Moderation Service)</a></strong>, we provide <strong>the first benchmark</strong> to pair production moderation decisions with independent human annotations grounded in the platform's policy. We evaluate 14 Vision-Language Models spanning open-weight, frontier (API-based), and specialized safety-tuned models under two prompting paradigms of policy guidance.
     </p>
     <!-- <p class="overview-intro reveal">
       We systematically compare two paradigms for guiding Vision-Language Models through Bluesky's real-world content policy on <strong>ModerationBench</strong> — 4,000 manually annotated multimodal posts across four complementary evaluation subsets. All models are benchmarked against <strong><a href="https://bsky.app/profile/did:plc:ar7c4by46qjdydhdevvrndac" target="_blank" rel="noopener">BMS</a></strong> (Bluesky Moderation Service), the platform's deployed automated moderation system.
@@ -1412,8 +1416,8 @@
         <button class="sankey-tab" onclick="setSankeyPair('gemma_instr_vs_fewshot',this)"><img src="icons/gemma-color.svg" style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em;">Gemma4: Instruction vs Example</button>
       </div>
 
-      <div style="position:relative; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; overflow:hidden;">
-        <canvas id="sankey-canvas" style="display:block; width:100%; height:560px;"></canvas>
+      <div style="position:relative; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; overflow-x:auto;">
+        <canvas id="sankey-canvas" style="display:block; width:100%; min-width:560px; height:560px;"></canvas>
         <div id="sankey-tooltip" style="position:absolute; display:none; z-index:10; background:rgba(15,23,42,0.82); color:white; padding:0.45rem 0.65rem; border-radius:5px; font-size:0.74rem; line-height:1.5; pointer-events:none; box-shadow:0 3px 12px rgba(0,0,0,0.22);"></div>
       </div>
 
@@ -1453,8 +1457,8 @@
         </div>
       </div>
 
-      <div style="position:relative; width:100%; overflow:hidden; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white;">
-        <canvas id="cit-canvas" style="display:block; width:100%;"></canvas>
+      <div style="position:relative; width:100%; overflow-x:auto; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white;">
+        <canvas id="cit-canvas" style="display:block; width:100%; min-width:500px;"></canvas>
         <div id="cit-tooltip" style="
           position:absolute; display:none; z-index:10;
           background:rgba(15,23,42,0.72); color:white;
@@ -1481,8 +1485,8 @@
         </div>
       </div>
       <div id="cit-cmp-legend" style="display:flex; gap:1.4rem; flex-wrap:wrap; margin-bottom:0.5rem; font-size:0.78rem; color:var(--text-light);"></div>
-      <div style="position:relative; width:100%; overflow:hidden; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white;">
-        <canvas id="cit-compare-canvas" style="display:block; width:100%;"></canvas>
+      <div style="position:relative; width:100%; overflow-x:auto; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white;">
+        <canvas id="cit-compare-canvas" style="display:block; width:100%; min-width:500px;"></canvas>
         <div id="cit-compare-tooltip" style="position:absolute; display:none; z-index:10; background:rgba(15,23,42,0.82); color:white; padding:0.6rem 0.8rem; border-radius:6px; font-size:0.75rem; line-height:1.55; max-width:300px; pointer-events:none; box-shadow:0 4px 20px rgba(0,0,0,0.25); backdrop-filter:blur(2px);"></div>
       </div>
 
