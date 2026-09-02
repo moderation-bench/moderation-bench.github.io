@@ -503,6 +503,7 @@
   .paradigm-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:3.5rem 0 2.5rem; }
   .subsec-divider { border:none; border-top:1px solid var(--slate-mid); margin:3rem 0 2rem; }
   .section-sep { border-top: 2px solid #e2e8f0; }
+  .section-dark-sep { border-top: 1px solid rgba(255,255,255,0.08); }
   .subsec-h3 { font-family:var(--serif); font-size:1.5rem; font-weight:400; color:var(--text); margin-bottom:0.5rem; margin-top:0.2rem; }
   .paradigm-subhead { margin-bottom:1rem; }
   .paradigm-subhead h3 { font-family:var(--serif); font-size:1.6rem; font-weight:400; color:white; margin-top:0.2rem; }
@@ -715,6 +716,7 @@
   .reveal.visible { opacity: 1; transform: none; }
 
   /* === RESPONSIVE === */
+  @media (max-width: 640px) { .team-grid { grid-template-columns: 1fr !important; } }
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero { padding: 5rem 1.5rem 3.5rem; }
@@ -908,6 +910,7 @@
       </div>
     </li>
     <li><a href="#efficiency">Efficiency</a></li>
+    <li><a href="#team">Team</a></li>
     <li><a href="#citation">Cite</a></li>
   </ul>
 </nav>
@@ -3572,8 +3575,94 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
   </div>
 </section>
 
+<!-- TEAM -->
+<section class="section section-dark section-sep" id="team">
+  <div class="container">
+    <div class="section-label">Authors</div>
+    <h2>Research Team</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem;" class="team-grid">
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Ayan Majumdar</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Doctoral Researcher</div>
+        <div style="font-size:0.78rem; color:var(--muted); white-space:nowrap;">MPI-SWS · Saarland University</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://ayanmaj.netlify.app/" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Shounak Paul</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Postdoctoral Researcher</div>
+        <div style="font-size:0.78rem; color:var(--muted);">MPI-SWS</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://sites.google.com/view/shounakpaul95" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Pushpdeep Singh</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Doctoral Researcher</div>
+        <div style="font-size:0.78rem; color:var(--muted); white-space:nowrap;">MPI-SWS · RPTU</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://sites.google.com/view/pushpdeep" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Ines Abdelaziz</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Doctoral Researcher</div>
+        <div style="font-size:0.78rem; color:var(--muted);">INRIA</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">France</div>
+        <a href="https://www.linkedin.com/in/inesabdelaziz/" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Sayeh Jarollahi</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Doctoral Researcher</div>
+        <div style="font-size:0.78rem; color:var(--muted);">Saarland University</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://www.linkedin.com/in/sayeh-jarollahi-62b01a38b/" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Seungeon Lee</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Postdoctoral Researcher</div>
+        <div style="font-size:0.78rem; color:var(--muted);">MPI-SWS</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://sites.google.com/view/seungeon-lee" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Krishna P. Gummadi</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Professor</div>
+        <div style="font-size:0.78rem; color:var(--muted);">MPI-SWS</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://people.mpi-sws.org/~gummadi/" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Ingmar Weber</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Professor</div>
+        <div style="font-size:0.78rem; color:var(--muted);">Saarland University</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://ingmarweber.de/" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+      <div style="padding:1rem 1.2rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+        <div style="font-weight:600; color:var(--text); margin-bottom:0.25rem;">Abhisek Dash</div>
+        <div style="font-size:0.72rem; font-family:var(--mono); color:var(--teal); margin-bottom:0.3rem;">Postdoctoral Researcher</div>
+        <div style="font-size:0.78rem; color:var(--muted);">MPI-SWS</div>
+        <div style="font-size:0.72rem; color:var(--muted); opacity:0.7; margin-top:0.2rem;">Germany</div>
+        <a href="https://sites.google.com/site/abhisek0193" target="_blank" style="display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.45rem; font-size:0.72rem; color:var(--teal); text-decoration:none; opacity:0.85;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><i class="fa-solid fa-globe"></i>Website</a>
+      </div>
+    </div>
+    <div style="margin-top:2rem;">
+      <div style="font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--teal); font-weight:700; margin-bottom:0.8rem;">Contact</div>
+      <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+        <div style="padding:0.75rem 1.1rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+          <div style="font-weight:600; font-size:0.85rem; color:var(--text); margin-bottom:0.2rem;">Ayan Majumdar</div>
+          <div style="font-family:var(--mono); font-size:0.75rem; color:var(--teal);">ayanmaj[at]protonmail.com</div>
+        </div>
+        <div style="padding:0.75rem 1.1rem; border:1px solid var(--slate-mid); border-radius:var(--radius); background:white; box-shadow:var(--shadow);">
+          <div style="font-weight:600; font-size:0.85rem; color:var(--text); margin-bottom:0.2rem;">Pushpdeep Singh</div>
+          <div style="font-family:var(--mono); font-size:0.75rem; color:var(--teal);">psingh[at]mpi-sws.org</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CITATION -->
-<section class="section section-dark" id="citation">
+<section class="section section-dark section-dark-sep" id="citation">
   <div class="container">
     <div class="section-label">Citation</div>
     <h2>Cite This Work</h2>
@@ -3597,7 +3686,6 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
         <svg style="width:1.1em;height:1.1em;fill:currentColor;flex-shrink:0;" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> View Code
       </a>
     </div>
-    <p style="color:rgba(255,255,255,0.2); font-size:0.75rem; margin-top:1rem;">Dataset is gated — non-commercial use only due to sensitive content.</p>
   </div>
 </section>
 
