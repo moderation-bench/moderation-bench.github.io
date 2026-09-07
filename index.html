@@ -1016,11 +1016,11 @@
           </div>
           <div class="paradigm-stat">
             <span>Open-weight throughput</span>
-            <span class="paradigm-stat-val">1-9 posts / min </span>
+            <span class="paradigm-stat-val">2-71 posts / min</span>
           </div>
           <div class="paradigm-stat">
             <span>Frontier API cost</span>
-            <span class="paradigm-stat-val">$112 – $494</span>
+            <span class="paradigm-stat-val">$112 – $2,553</span>
           </div>
         </div>
       </div>
@@ -1293,7 +1293,7 @@
     <p class="reveal" style="font-size:0.76rem;color:var(--muted);margin-bottom:0.9rem;line-height:1.6;">
       <strong style="color:var(--text-light);">Setup notes —</strong>
       Instruction-driven: all models use the full Bluesky policy (Labels + Rationale + Details).
-      Example-driven: frontier models (GPT, Gemini) use the Prototypical strategy; open-weight models use the Contextual strategy.
+      Example-driven: all models use the Prototypical strategy.
     </p>
 
     <div class="lb-pr-controls reveal" id="lb-metric-controls">
@@ -3415,7 +3415,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
   <div class="container">
     <div class="section-label">Efficiency &amp; Cost</div>
     <h2>Practical Considerations for Deployment</h2>
-    <p class="section-intro">Instruction-driven moderation handles tens to hundreds of posts per minute, whereas example-driven prompting drops throughput to under 6 posts/min with no F₁ gain. Open-weight models offer frontier-level performance at no added API cost (when self-hosting).</p>
+    <p class="section-intro">Instruction-driven moderation handles tens to hundreds of posts per minute. With prototypical example-driven prompting, throughput ranges from ~2 posts/min for frontier API models to ~70 posts/min for efficient open-weight models — with no F₁ gain over instruction-driven. Open-weight models offer frontier-level performance at no added API cost (when self-hosting).</p>
 
     <!-- TIMING HEATMAP (mode tabs) -->
     <div style="margin-top:1.5rem; font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.5rem;">
@@ -3458,15 +3458,16 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
         <div>Prototypical</div>
         <div>Contextual</div>
       </div>
-      <div class="thm-row"><div class="thm-model">gemma4</div><div class="thm-cell" data-val="8.9">8.9</div><div class="thm-cell" data-val="9.7">9.7</div><div class="thm-cell" data-val="1.0">1.0</div></div>
-      <div class="thm-row"><div class="thm-model">qwen3.5</div><div class="thm-cell" data-val="4.1">4.1</div><div class="thm-cell" data-val="4.8">4.8</div><div class="thm-cell" data-val="1.0">1.0</div></div>
-      <div class="thm-row"><div class="thm-model">qwen3vl-th</div><div class="thm-cell" data-val="5.5">5.5</div><div class="thm-cell" data-val="9.7">9.7</div><div class="thm-cell" data-val="0.9">0.9</div></div>
-      <div class="thm-row"><div class="thm-model">magistral</div><div class="thm-cell" data-val="9.3">9.3</div><div class="thm-cell" data-val="10.5">10.5</div><div class="thm-cell" data-val="0.9">0.9</div></div>
-      <div class="thm-row"><div class="thm-model">gemma3</div><div class="thm-cell" data-val="17.0">17.0</div><div class="thm-cell" data-val="24.8">24.8</div><div class="thm-cell" data-val="3.1">3.1</div></div>
-      <div class="thm-row"><div class="thm-model">mistral3</div><div class="thm-cell" data-val="35.9">35.9</div><div class="thm-cell" data-val="49.6">49.6</div><div class="thm-cell" data-val="3.3">3.3</div></div>
-      <div class="thm-row"><div class="thm-model">qwen3vl</div><div class="thm-cell" data-val="55.6">55.6</div><div class="thm-cell" data-val="69.0">69.0</div><div class="thm-cell" data-val="5.7">5.7</div></div>
-      <div class="thm-row"><div class="thm-model">llama4</div><div class="thm-cell" data-val="57.7">57.7</div><div class="thm-cell" data-val="71.4">71.4</div><div class="thm-cell" data-val="5.0">5.0</div></div>
+      <div class="thm-row"><div class="thm-model">gemma4</div><div class="thm-cell" data-val="8.9">8.9</div><div class="thm-cell" data-val="9.7">9.7</div><div class="thm-cell" data-val="4.1">4.1</div></div>
+      <div class="thm-row"><div class="thm-model">qwen3.5</div><div class="thm-cell" data-val="4.1">4.1</div><div class="thm-cell" data-val="4.8">4.8</div><div class="thm-cell" data-val="2.9">2.9</div></div>
+      <div class="thm-row"><div class="thm-model">qwen3vl-th</div><div class="thm-cell" data-val="5.5">5.5</div><div class="thm-cell" data-val="9.7">9.7</div><div class="thm-cell" data-val="3.0">3.0</div></div>
+      <div class="thm-row"><div class="thm-model">magistral</div><div class="thm-cell" data-val="9.3">9.3</div><div class="thm-cell" data-val="10.5">10.5</div><div class="thm-cell" data-val="3.1">3.1</div></div>
+      <div class="thm-row"><div class="thm-model">gemma3</div><div class="thm-cell" data-val="17.0">17.0</div><div class="thm-cell" data-val="24.8">24.8</div><div class="thm-cell" data-val="3.2">3.2</div></div>
+      <div class="thm-row"><div class="thm-model">mistral3</div><div class="thm-cell" data-val="35.9">35.9</div><div class="thm-cell" data-val="49.6">49.6</div><div class="thm-cell" data-val="4.2">4.2</div></div>
+      <div class="thm-row"><div class="thm-model">qwen3vl</div><div class="thm-cell" data-val="55.6">55.6</div><div class="thm-cell" data-val="69.0">69.0</div><div class="thm-cell" data-val="8.1">8.1</div></div>
+      <div class="thm-row"><div class="thm-model">llama4</div><div class="thm-cell" data-val="57.7">57.7</div><div class="thm-cell" data-val="71.4">71.4</div><div class="thm-cell" data-val="10.2">10.2</div></div>
       <div class="thm-row"><div class="thm-model">gemini</div><div class="thm-cell" data-val="3.6">3.6</div><div class="thm-cell" data-val="4.4">4.4</div><div class="thm-cell" data-val="3.2">3.2</div></div>
+      <div class="thm-row"><div class="thm-model">gpt5.6</div><div class="thm-cell" data-val="2.7">2.7</div><div class="thm-cell" data-val="2.5">2.5</div><div class="thm-cell" data-val="4.1">4.1</div></div>
     </div>
 
     <!-- MODE 3: Across Paradigms (9 models × 2 columns) -->
@@ -3474,17 +3475,18 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
       <div class="thm-header">
         <div>Model</div>
         <div style="color:#15803d">Instruction-driven <small style="font-weight:400;text-transform:none;letter-spacing:0">(Full policy)</small></div>
-        <div style="color:#b91c1c">Example-driven <small style="font-weight:400;text-transform:none;letter-spacing:0">(Contextual / Prototypical†)</small></div>
+        <div style="color:#b91c1c">Example-driven <small style="font-weight:400;text-transform:none;letter-spacing:0">(Prototypical)</small></div>
       </div>
-      <div class="thm-row"><div class="thm-model">gemma4</div><div class="thm-cell" data-val="50.0">50.0</div><div class="thm-cell" data-val="1.0">1.0</div></div>
-      <div class="thm-row"><div class="thm-model">qwen3.5</div><div class="thm-cell" data-val="28.6">28.6</div><div class="thm-cell" data-val="1.0">1.0</div></div>
-      <div class="thm-row"><div class="thm-model">qwen3vl-th</div><div class="thm-cell" data-val="19.5">19.5</div><div class="thm-cell" data-val="0.9">0.9</div></div>
-      <div class="thm-row"><div class="thm-model">magistral</div><div class="thm-cell" data-val="29.3">29.3</div><div class="thm-cell" data-val="0.9">0.9</div></div>
-      <div class="thm-row"><div class="thm-model">gemma3</div><div class="thm-cell" data-val="162.2">162.2</div><div class="thm-cell" data-val="3.1">3.1</div></div>
-      <div class="thm-row"><div class="thm-model">mistral3</div><div class="thm-cell" data-val="89.6">89.6</div><div class="thm-cell" data-val="3.3">3.3</div></div>
-      <div class="thm-row"><div class="thm-model">qwen3vl</div><div class="thm-cell" data-val="139.5">139.5</div><div class="thm-cell" data-val="5.7">5.7</div></div>
-      <div class="thm-row"><div class="thm-model">llama4</div><div class="thm-cell" data-val="130.4">130.4</div><div class="thm-cell" data-val="5.0">5.0</div></div>
-      <div class="thm-row"><div class="thm-model">gemini</div><div class="thm-cell" data-val="9.2">9.2</div><div class="thm-cell" data-val="4.4">4.4 †</div></div>
+      <div class="thm-row"><div class="thm-model">gemma4</div><div class="thm-cell" data-val="50.0">50.0</div><div class="thm-cell" data-val="9.7">9.7</div></div>
+      <div class="thm-row"><div class="thm-model">qwen3.5</div><div class="thm-cell" data-val="28.6">28.6</div><div class="thm-cell" data-val="4.8">4.8</div></div>
+      <div class="thm-row"><div class="thm-model">qwen3vl-th</div><div class="thm-cell" data-val="19.5">19.5</div><div class="thm-cell" data-val="9.7">9.7</div></div>
+      <div class="thm-row"><div class="thm-model">magistral</div><div class="thm-cell" data-val="29.3">29.3</div><div class="thm-cell" data-val="10.5">10.5</div></div>
+      <div class="thm-row"><div class="thm-model">gemma3</div><div class="thm-cell" data-val="162.2">162.2</div><div class="thm-cell" data-val="24.8">24.8</div></div>
+      <div class="thm-row"><div class="thm-model">mistral3</div><div class="thm-cell" data-val="89.6">89.6</div><div class="thm-cell" data-val="49.6">49.6</div></div>
+      <div class="thm-row"><div class="thm-model">qwen3vl</div><div class="thm-cell" data-val="139.5">139.5</div><div class="thm-cell" data-val="69.0">69.0</div></div>
+      <div class="thm-row"><div class="thm-model">llama4</div><div class="thm-cell" data-val="130.4">130.4</div><div class="thm-cell" data-val="71.4">71.4</div></div>
+      <div class="thm-row"><div class="thm-model">gemini</div><div class="thm-cell" data-val="9.2">9.2</div><div class="thm-cell" data-val="4.4">4.4</div></div>
+      <div class="thm-row"><div class="thm-model">gpt5.6</div><div class="thm-cell" data-val="24.0">24.0</div><div class="thm-cell" data-val="2.5">2.5</div></div>
     </div>
 
     <!-- throughput callouts -->
@@ -3535,7 +3537,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
     </div>
 
     <p style="font-size:0.78rem; color:var(--muted); margin-top:0.8rem; line-height:1.6;">
-      The contextual example-driven setting achieves lower throughput partly because it cannot benefit from prefix caching, unlike the random and prototypical settings, which use a fixed example set. † Gemini uses Prototypical (best-performing strategy); all other models use Contextual.
+      The contextual example-driven setting achieves lower throughput partly because it cannot benefit from prefix caching, unlike the random and prototypical settings, which use a fixed example set. All models use the Prototypical strategy in the cross-paradigm comparison above.
     </p>
 
     <!-- API COST -->
@@ -3544,7 +3546,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
     </div>
     <div class="cost-grid">
       <div class="cost-card reveal">
-        <div class="cost-card-title">Instruction-Driven · Full Policy Granularity</div>
+        <div class="cost-card-title">Instruction-Driven · Frontier API Cost</div>
         <div style="margin-bottom:1rem;">
           <div style="font-size:0.78rem; color:var(--muted); margin-bottom:0.5rem; font-family:var(--mono);"><img src="icons/openai.svg" style="width:1em;height:1em;vertical-align:-0.13em;margin-right:0.3em;opacity:0.85;" alt="">gpt5.6-terra</div>
           <div class="cost-row"><span class="cost-label">Labels only</span><span class="cost-val green">$17.00</span></div>
@@ -3563,12 +3565,21 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
       </div>
 
       <div class="cost-card reveal">
-        <div class="cost-card-title"><img src="icons/gemini-color.svg" style="width:1em;height:1em;vertical-align:-0.13em;margin-right:0.3em;" alt="">gemini3.5 · Example-Driven (vs. $40.68 instruction baseline)</div>
-        <div class="cost-row"><span class="cost-label">Random examples</span><span class="cost-val amber">$158.49 <small style="font-weight:400;color:var(--muted)">3.9×</small></span></div>
-        <div class="cost-row"><span class="cost-label">Prototypical examples</span><span class="cost-val red">$112.77 <small style="font-weight:400;color:var(--muted)">2.8×</small></span></div>
-        <div class="cost-row"><span class="cost-label">Contextual examples</span><span class="cost-val red">$493.87 <small style="font-weight:400;color:var(--muted)">12.1×</small></span></div>
+        <div class="cost-card-title">Example-Driven · Frontier API Cost</div>
+        <div style="margin-bottom:1rem;">
+          <div style="font-size:0.78rem; color:var(--muted); margin-bottom:0.5rem; font-family:var(--mono);"><img src="icons/gemini-color.svg" style="width:1em;height:1em;vertical-align:-0.13em;margin-right:0.3em;" alt="">gemini3.5-flash <span style="color:var(--muted); font-size:0.72rem;">(vs. $40.68 instruction baseline)</span></div>
+          <div class="cost-row"><span class="cost-label">Random examples</span><span class="cost-val amber">$158.49 <small style="font-weight:400;color:var(--muted)">3.9×</small></span></div>
+          <div class="cost-row"><span class="cost-label">Prototypical examples</span><span class="cost-val red">$112.77 <small style="font-weight:400;color:var(--muted)">2.8×</small></span></div>
+          <div class="cost-row"><span class="cost-label">Contextual examples</span><span class="cost-val red">$493.87 <small style="font-weight:400;color:var(--muted)">12.1×</small></span></div>
+        </div>
+        <div>
+          <div style="font-size:0.78rem; color:var(--muted); margin-bottom:0.5rem; font-family:var(--mono);"><img src="icons/openai.svg" style="width:1em;height:1em;vertical-align:-0.13em;margin-right:0.3em;opacity:0.85;" alt="">gpt5.6-terra <span style="color:var(--muted); font-size:0.72rem;">(vs. $62.65 instruction baseline)</span></div>
+          <div class="cost-row"><span class="cost-label">Random examples</span><span class="cost-val red">$819.31 <small style="font-weight:400;color:var(--muted)">13.1×</small></span></div>
+          <div class="cost-row"><span class="cost-label">Prototypical examples</span><span class="cost-val red">$2,000.78 <small style="font-weight:400;color:var(--muted)">31.9×</small></span></div>
+          <div class="cost-row"><span class="cost-label">Contextual examples</span><span class="cost-val red">$2,553.04 <small style="font-weight:400;color:var(--muted)">40.8×</small></span></div>
+        </div>
         <p style="font-size:0.78rem; color:var(--muted); margin-top:1rem; line-height:1.55;">
-          Contextual examples process more images per query and disable prefix caching (unique prefix per query), driving costs dramatically higher — with no F₁ gain over instruction-driven.
+          Contextual examples process more images per query and disable prefix caching, driving costs dramatically higher — with no F₁ gain over instruction-driven. GPT costs are substantially higher than Gemini across all strategies.
         </p>
       </div>
     </div>
@@ -4328,7 +4339,7 @@ window.addEventListener("resize", () => { drawF1Chart(); drawFlagChart(); drawEg
       random:{p:0.09, r:0.42, f1:0.14}, mod:{p:0.93, r:0.53, f1:0.67}, near:{p:0.61, r:0.47, f1:0.53}, safe:{flag:0.1534} },
     { display:'shieldstral',   size:'3B',     icon:'shieldstral',   type:'safety',   paradigm:'instr',   cfg:'',
       random:{p:0.07, r:0.96, f1:0.13}, mod:{p:0.85, r:0.97, f1:0.91}, near:{p:0.51, r:0.96, f1:0.67}, safe:{flag:0.0725} },
-    // Example-driven (gemini/gpt: Prototypical; open-weight: Contextual where available, else Prototypical):
+    // Example-driven (all models: Prototypical):
     { display:'gemini3.5',    size:'flash',   icon:'gemini-color',  type:'frontier', paradigm:'example', cfg:'',
       random:{p:0.53, r:0.67, f1:0.59}, mod:{p:0.89, r:0.97, f1:0.93}, near:{p:0.81, r:0.88, f1:0.84}, safe:{flag:0.0000} },
     { display:'gemma4',       size:'31B',     icon:'gemma-color',   type:'open',     paradigm:'example', cfg:'',
